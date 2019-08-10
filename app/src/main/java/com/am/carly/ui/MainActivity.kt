@@ -1,7 +1,8 @@
-package com.am.carly
+package com.am.carly.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.am.carly.R
 
 class MainActivity : AppCompatActivity() {
 
