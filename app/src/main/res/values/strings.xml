@@ -6,4 +6,5 @@
     <string name="go_to_settings">Go to Settings</string>
     <string name="login_activity_title">Login</string>
     <string name="main_activity_title">Choose a city</string>
+    <string name="cars_activity_title">Cars List</string>
 </resources>

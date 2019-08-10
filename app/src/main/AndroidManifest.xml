@@ -34,8 +34,9 @@
                 android:label="@string/login_activity_title"/>
 
         <activity
-                android:name=".ui.MainActivity"
+                android:name=".ui.cities.CitiesActivity"
                 android:label="@string/main_activity_title"/>
+        <activity android:name=".ui.cars.CarsActivity" android:label="@string/cars_activity_title"/>
 
     </application>
 
