@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Carly</string>
+
+    <string name="internet_connection_required">Internet connection required</string>
+    <string name="internet_connection_required_message">There is a problem with the Internet connection. Please, check your connection and then try again.</string>
+    <string name="go_to_settings">Go to Settings</string>
+    <string name="login_activity_title">Login</string>
+    <string name="main_activity_title">Choose a city</string>
 </resources>
