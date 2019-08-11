@@ -56,7 +56,7 @@ class CarDetailsActivity : BaseActivity(), KodeinAware {
     }
 
 
-    private fun getFakeSliderImagesList(): ArrayList<SliderImage> {
+     fun getFakeSliderImagesList(): ArrayList<SliderImage> {
         val imagesList = ArrayList<SliderImage>()
         imagesList.add(
             SliderImage(

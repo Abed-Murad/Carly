@@ -22,6 +22,7 @@ class MyApplication : Application(), KodeinAware {
         bind() from singleton { MyApi() }
         bind() from provider { SplashViewModelFactory(instance()) }
         bind() from provider { CitiesViewModelFactory(instance()) }
+        bind() from provider { AddCarViewModelFactory(instance()) }
         bind() from provider { CarsViewModelFactory(instance()) }
         bind() from provider { ChooseLocationViewModelFactory(instance()) }
         bind() from provider { PoliciesViewModelFactory(instance()) }
