@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable name="viewModel" type="com.am.carly.ui.cars.CarDetailsViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -136,7 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
-                android:text="Next"
+                android:text="@string/rent_this_car"
+                android:onClick="@{viewModel::onNextBtnClick}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="16dp"
                 android:textAllCaps="false"

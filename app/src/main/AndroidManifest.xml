@@ -36,6 +36,9 @@
         <activity android:name=".ui.cars.CarsActivity" android:label="@string/cars_activity_title"/>
         <activity android:name=".ui.maps.MapViewActivity" android:label="@string/map_view_activity_title"/>
         <activity android:name=".ui.cars.CarDetailsActivity" android:label="@string/car_details_title"/>
+        <activity android:name=".ui.rent.DateRangeActivity"  android:label="@string/date_range_activity_title"/>
+        <activity android:name=".ui.maps.ChooseLocationActivity" android:label="@string/choose_location_activity_title"/>
+        <activity android:name=".ui.policies.PoliciesActivity"/>
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"

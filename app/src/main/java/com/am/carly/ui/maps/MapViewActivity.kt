@@ -63,8 +63,10 @@ class MapViewActivity : BaseActivity(), KodeinAware {
         })
     }
 
-    val MAP_GAZA_ZOOM_SCALE = 10.4f
-    val MAP_PALESTINE_ZOOM_SCALE = 7.5f
-    val GAZA_STRIP_CENTER_LAT_LNG = LatLng(31.442249, 34.396284)
-    val PALESTINE_CENTER_LAT_LNG = LatLng(31.460364, 34.972938)
+    companion object {
+        val MAP_GAZA_ZOOM_SCALE = 10.4f
+        val MAP_PALESTINE_ZOOM_SCALE = 7.5f
+        val GAZA_STRIP_CENTER_LAT_LNG = LatLng(31.442249, 34.396284)
+        val PALESTINE_CENTER_LAT_LNG = LatLng(31.460364, 34.972938)
+    }
 }

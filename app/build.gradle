@@ -54,7 +54,7 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
 
-
+    implementation 'com.squareup:android-times-square:1.6.5@aar'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     //Firebase

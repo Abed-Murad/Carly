@@ -24,6 +24,7 @@ class CarDetailsActivity : BaseActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_car_details)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CarDetailsViewModel::class.java)
+        mBinding.viewModel = mViewModel
         setupImagesPager()
     }
 

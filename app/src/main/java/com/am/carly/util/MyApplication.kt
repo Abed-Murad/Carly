@@ -23,7 +23,10 @@ class MyApplication : Application(), KodeinAware {
         bind() from provider { SplashViewModelFactory(instance()) }
         bind() from provider { CitiesViewModelFactory(instance()) }
         bind() from provider { CarsViewModelFactory(instance()) }
+        bind() from provider { ChooseLocationViewModelFactory(instance()) }
+        bind() from provider { PoliciesViewModelFactory(instance()) }
         bind() from provider { MapViewViewModelFactory(instance()) }
+        bind() from provider { DateRangeViewModelFactory(instance()) }
         bind() from provider { CarDetailsViewModelFactory(instance()) }
         bind() from singleton { UserRepository(instance(), instance()) }
     }
