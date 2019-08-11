@@ -7,4 +7,16 @@
     <string name="login_activity_title">Login</string>
     <string name="main_activity_title">Choose a city</string>
     <string name="cars_activity_title">Cars List</string>
+    <string name="car_details_title">Car Details</string>
+    <string name="large_text">Sleek, powerful, and aerodynamic, this 2017 Ford Mustang packs a 310HP Turbo engine and
+        has an iconic style all its own.\\n\\n Equipped with HID headlamps, LED tail lamps with sequential turn signals,
+        and dual exhaust pipes, this beauty turns heads wherever you go.\\n\\n Enjoy comfortable bucket seats and
+        leather-wrapped steering wheel, paired with a deep guttural rumble when you start the engine.\\n Equipped with
+        Ford SYNC and voice-activated technology, pair your smartphone for integration with your apps, and use your
+        voice to control features without taking your eyes off the road.\\n Hot or cold outside? Use remote start to
+        start the engine before you get to the car, the climate control system will adjust the temperature to a
+        comfortable setting before you get to the car.\\n Book it now and get ready to have fun!\\n\\n DESIGNATED TURO
+        POWER HOST - The best of Turo, see reviews on host profile.
+    </string>
+    <string name="map_view_activity_title">Map View</string>
 </resources>

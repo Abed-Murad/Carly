@@ -37,14 +37,18 @@ class CitiesActivity : BaseActivity(), KodeinAware {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cities)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CitiesViewModel::class.java)
 
+        loadCitiesFromFireStore()
+    }
+
+    private fun loadCitiesFromFireStore() {
         val query = FirebaseFirestore.getInstance().collection("cities")
-
-
-        val options = FirestoreRecyclerOptions.Builder<City>().setQuery(query, City::class.java)
-            .setLifecycleOwner(this@CitiesActivity).build()
-
+        val options = FirestoreRecyclerOptions.Builder<City>()
+            .setQuery(query, City::class.java)
+            .setLifecycleOwner(this@CitiesActivity)
+            .build()
 
         val adapter = object : FirestoreRecyclerAdapter<City, CityHolder>(options) {
+
             override fun onBindViewHolder(holder: CityHolder, position: Int, model: City) {
                 holder.bind(model)
             }
@@ -57,12 +61,11 @@ class CitiesActivity : BaseActivity(), KodeinAware {
                 return CityHolder(binding)
             }
         }
-        adapter.startListening()
         citiesRecyclerView.adapter = adapter
         citiesRecyclerView.layoutManager = LinearLayoutManager(this@CitiesActivity)
     }
 
-   inner class CityHolder(var binding: ItemCityBinding) : RecyclerView.ViewHolder(binding.root) , View.OnClickListener {
+    inner class CityHolder(var binding: ItemCityBinding) : RecyclerView.ViewHolder(binding.root) , View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)

@@ -4,9 +4,7 @@ import android.app.Application
 import com.am.carly.data.local.LoginPref
 import com.am.carly.data.remote.MyApi
 import com.am.carly.data.repository.UserRepository
-import com.am.carly.ui.base.viewmodelfactory.CarsViewModelFactory
-import com.am.carly.ui.base.viewmodelfactory.CitiesViewModelFactory
-import com.am.carly.ui.base.viewmodelfactory.SplashViewModelFactory
+import com.am.carly.ui.base.viewmodelfactory.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -25,6 +23,8 @@ class MyApplication : Application(), KodeinAware {
         bind() from provider { SplashViewModelFactory(instance()) }
         bind() from provider { CitiesViewModelFactory(instance()) }
         bind() from provider { CarsViewModelFactory(instance()) }
+        bind() from provider { MapViewViewModelFactory(instance()) }
+        bind() from provider { CarDetailsViewModelFactory(instance()) }
         bind() from singleton { UserRepository(instance(), instance()) }
     }
 

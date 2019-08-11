@@ -6,5 +6,7 @@
 
 
     <color name="black_alpha_77">#77231F20</color>
+    <color name="off_white">#F5F3F3</color>
+    <color name="black">#231F20</color>
 
 </resources>
