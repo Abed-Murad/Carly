@@ -29,9 +29,9 @@ class MapViewActivity : BaseActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_map_view)
         mViewModel = ViewModelProviders.of(this, mFactory).get(MapViewViewModel::class.java)
+        mBinding.viewModel = mViewModel
         setupMapFragment()
     }
-
 
     private fun setupMapFragment() {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -46,7 +46,7 @@ class MapViewActivity : BaseActivity(), KodeinAware {
                 loadMapFakeData()
                 mGoogleMap!!.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
-                        PALESTINE_CENTER_LAT_LNG, MAP_PALESTINE_ZOOM_SCALE
+                        GAZA_STRIP_CENTER_LAT_LNG, MAP_GAZA_ZOOM_SCALE
                     )
                 )
 
@@ -67,5 +67,4 @@ class MapViewActivity : BaseActivity(), KodeinAware {
     val MAP_PALESTINE_ZOOM_SCALE = 7.5f
     val GAZA_STRIP_CENTER_LAT_LNG = LatLng(31.442249, 34.396284)
     val PALESTINE_CENTER_LAT_LNG = LatLng(31.460364, 34.972938)
-
 }

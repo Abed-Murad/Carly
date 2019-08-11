@@ -1,16 +1,13 @@
 package com.am.carly.util
 
-import com.am.carly.R
-
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-
+import com.am.carly.R
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-
-import java.util.ArrayList
+import java.util.*
 
 
 object FAKE {
@@ -18,7 +15,6 @@ object FAKE {
     //Dummy
     val IMG_URL_FOOTBALL = "https://images.carscoops.com/2018/07/a3f42202-a4.jpg"
     val IMG_URL_STARS = "https://cdn.pixabay.com/photo/2016/03/23/07/44/bmw-1274292_960_720.jpg"
-    val IMG_URL_CAT = "https://www.amigoautos.com/img/vehiculos/skoda-octavia.jpg"
 
     fun getGazaFakeMarkersList(context: Context): List<MarkerOptions> {
         val markerOptionsList = ArrayList<MarkerOptions>()

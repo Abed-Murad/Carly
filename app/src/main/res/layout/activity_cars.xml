@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+
+    <data>
+        <variable name="viewModel" type="com.am.carly.ui.cars.CarsViewModel"/>
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -30,10 +34,8 @@
                 app:cardCornerRadius="25dp"
                 app:cardElevation="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-        >
+                app:layout_constraintStart_toStartOf="parent">
 
 
             <LinearLayout
@@ -45,11 +47,12 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                 <Button
-                        android:id="@+id/viewButton"
+                        android:id="@+id/mapViewBtn"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:drawableStart="@drawable/ic_map"
+                        android:onClick="@{viewModel::onMapViewBtnClick}"
                         android:drawablePadding="8dp"
                         android:text="Map"
                         android:textAllCaps="false"

@@ -16,7 +16,6 @@ import com.am.carly.databinding.ActivityCarsBinding
 import com.am.carly.databinding.ItemCarBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.base.viewmodelfactory.CarsViewModelFactory
-import com.am.carly.ui.maps.MapViewActivity
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -35,14 +34,12 @@ class CarsActivity : BaseActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cars)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CarsViewModel::class.java)
+        mBinding.viewModel = mViewModel
         loadCarsFromFireStore()
 
-        mBinding.viewButton.setOnClickListener {
-            val intent = Intent(this@CarsActivity, MapViewActivity::class.java)
-            startActivity(intent)
-        }
-
     }
+
+
 
     private fun loadCarsFromFireStore() {
         val query = FirebaseFirestore.getInstance().collection("cars_gaza")
