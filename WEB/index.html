@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add New Post</title>
+        <link href="css.css" rel="stylesheet">
+        <meta charset="utf-8"/>
+        <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+
+    </head>
+
+<body>
+
+    <h1 id="hotDogOutput">Add New Post:</h1>
+    <label for="urlField">Post Url </label><br/>
+    <input id="urlField" size="150" type="textfield"/>
+    <br/><br/>
+    <label for="titleField">Post Title </label><br/>
+    <input id="titleField" size="150" type="textfield"/>
+    <br/><br/>
+    <label for="imageUrlField">Post imageUrl </label><br/>
+    <input id="imageUrlField" size="150" type="textfield"/>
+    <br/><br/>
+    <label for="bodyField">Post Body </label><br/>
+    <textarea cols="151" id="bodyField" rows="10"></textarea>
+    <br/><br/>
+
+    <label for="isVideoCheckBox">is Video </label>
+    <br/>
+    <label class="switch">
+        <input checked id="isVideoCheckBox" type="checkbox">
+        <span class="slider round">
+        </span>
+    </label>
+    <br/><br/>
+
+
+    <button id="saveButton">Save</button>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
