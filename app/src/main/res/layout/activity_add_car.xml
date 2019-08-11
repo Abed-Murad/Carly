@@ -5,167 +5,168 @@
         <variable name="viewModel" type="com.am.carly.ui.cars.AddCarViewModel"/>
     </data>
 
-<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
-                                       android:layout_height="wrap_content">
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.cars.AddCarActivity">
-
-        <androidx.viewpager.widget.ViewPager
-                android:id="@+id/imagesPager"
+    <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+                                           android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:layout_height="match_parent"
+                tools:context=".ui.cars.AddCarActivity">
 
-        <TextView
-                android:id="@+id/imageNumberTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/rounded_corner_all_empty"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:text="5 of 10"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imagesPager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.045"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.924"/>
+            <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/imagesPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                app:srcCompat="@drawable/ic_camera"
-                android:id="@+id/pickImagesBtn"
-                android:layout_marginEnd="16dp"
-                android:onClick="@{viewModel::pickImagesBtnClick}"
-                app:layout_constraintEnd_toEndOf="@+id/imagesPager"
-                android:layout_marginTop="188dp"
-                app:layout_constraintTop_toTopOf="@+id/imagesPager"/>
+            <TextView
+                    android:id="@+id/imageNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/rounded_corner_all_empty"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="5 of 10"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imagesPager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.045"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.924"/>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/modelLayout"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/pickImagesBtn"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_camera"
+                    android:id="@+id/pickImagesBtn"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{viewModel::pickImagesBtnClick}"
+                    app:layout_constraintEnd_toEndOf="@+id/imagesPager"
+                    android:layout_marginTop="188dp"
+                    app:layout_constraintTop_toTopOf="@+id/imagesPager"/>
 
-            <com.google.android.material.textfield.TextInputEditText
+
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Car model &amp; year "/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:id="@+id/priceLayout"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/modelLayout"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">
+                    android:id="@+id/modelLayout"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/pickImagesBtn"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Car model &amp; year "/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/priceLayout"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/modelLayout"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Price per hour"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Price per hour"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/priceLayout"
+                    android:id="@+id/descriptionLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/priceLayout"
-                android:id="@+id/descriptionLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp">
+                <com.google.android.material.textfield.TextInputEditText
+                        android:inputType="textMultiLine"
+                        android:lines="8"
+                        android:minLines="6"
+                        android:gravity="top|left"
+                        android:maxLines="10"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:scrollbars="vertical"
+                        android:hint="Car description"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                    android:inputType="textMultiLine"
-                    android:lines="8"
-                    android:minLines="6"
-                    android:gravity="top|left"
-                    android:maxLines="10"
-                    android:layout_height="wrap_content"
+
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:scrollbars="vertical"
-                    android:hint="Car description"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:id="@+id/doorsCountLayout"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/descriptionLayout"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:inputType="number"
+                        android:layout_height="wrap_content"
+                        android:hint="Doors count"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:id="@+id/doorsCountLayout"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionLayout"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <Switch
+                    android:layout_width="0dp"
+                    android:checked="false"
+                    android:text="Automatic Transmission"
+                    android:textOff="Manual"
+                    android:textOn="Automatic"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/switch1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/doorsCountLayout" android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"/>
+            <Switch
+                    android:layout_width="0dp"
+                    android:checked="true"
+                    android:text="Full to Full (fuel policy)"
+                    android:textOff="Manual"
+                    android:textOn="Automatic"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/nextButton"
+                    android:id="@+id/switch2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/switch1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"/>
+            <Button
+                    android:id="@+id/nextButton"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Doors count"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@color/colorAccent"
+                    android:text="Choose car location"
+                    android:onClick="@{viewModel::onNextBtnClick}"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-        <Switch
-                android:layout_width="0dp"
-                android:checked="false"
-                android:text="Automatic Transmission"
-                android:textOff="Manual"
-                android:textOn="Automatic"
-                android:layout_height="wrap_content"
-                android:id="@+id/switch1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/doorsCountLayout" android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"/>
-        <Switch
-                android:layout_width="0dp"
-                android:checked="true"
-                android:text="Full to Full (fuel policy)"
-                android:textOff="Manual"
-                android:textOn="Automatic"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/nextButton"
-                android:id="@+id/switch2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/switch1"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"/>
-        <Button
-                android:id="@+id/nextButton"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="Choose car location"
-                android:onClick="@{viewModel::onNextBtnClick}"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

@@ -27,4 +27,5 @@
     <string name="choose_pickup_location">Choose Pickup Location</string>
     <string name="done">Done</string>
     <string name="add_car_activity_title">Rent your car</string>
+    <string name="start_activity_title">Welcome</string>
 </resources>
