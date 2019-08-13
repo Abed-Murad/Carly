@@ -68,7 +68,9 @@ class CarsActivity : BaseActivity(), KodeinAware {
         }
 
         fun bind(car: Car) {
-            Glide.with(binding.root.context).load(car.preivew_image).into(binding.imageView)
+            if (car.imagesList.isNotEmpty()) {
+                Glide.with(binding.root.context).load(car.imagesList[0]).into(binding.imageView)
+            }
             binding.textView.text = car.name
         }
 

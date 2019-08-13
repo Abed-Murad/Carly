@@ -112,6 +112,20 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/infoRecyclerView"/>
 
+
+                <fragment
+                        android:id="@+id/map"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="16dp"
+                        android:layout_height="200dp"
+                        tools:context=".activity.LocationActivity"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/description"
+                        />
+
+
                 <include
                         android:id="@+id/ownerInfoInclude"
                         layout="@layout/card_owner_info"
@@ -124,7 +138,7 @@
                         android:layout_marginBottom="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/description"/>
+                        app:layout_constraintTop_toBottomOf="@+id/map"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

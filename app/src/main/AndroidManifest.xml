@@ -18,13 +18,11 @@
             android:supportsRtl="false"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name=".ui.login.StartActivity" android:theme="@style/AppTheme.NoActionBar"
-                  android:label="@string/start_activity_title">
-
+        <activity
+                android:name=".ui.login.StartActivity"
+                android:label="@string/start_activity_title"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
-
         <activity
                 android:name=".ui.splash.SplashScreenActivity"
                 android:noHistory="true"
@@ -34,13 +32,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
         <activity
                 android:name=".ui.login.LoginActivity"
                 android:label="@string/login_activity_title"/>
         <activity
                 android:name=".ui.cities.CitiesActivity"
+                android:theme="@style/AppTheme.NoActionBar"
                 android:label="@string/main_activity_title"/>
         <activity
                 android:name=".ui.cars.CarsActivity"
@@ -58,9 +56,11 @@
                 android:name=".ui.maps.ChooseLocationActivity"
                 android:label="@string/choose_location_activity_title"/>
         <activity android:name=".ui.policies.PoliciesActivity"/>
-        <activity android:name=".ui.cars.AddCarActivity" android:label="@string/add_car_activity_title">
-
+        <activity
+                android:name=".ui.cars.AddCarActivity"
+                android:label="@string/add_car_activity_title">
         </activity>
+        <activity android:name=".ui.profile.ProfileActivity"/>
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"

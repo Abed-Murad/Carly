@@ -3,41 +3,71 @@ package com.am.carly.ui.cities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.am.carly.R
 import com.am.carly.data.model.City
 import com.am.carly.databinding.ActivityCitiesBinding
 import com.am.carly.databinding.ItemCityBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.base.viewmodelfactory.CitiesViewModelFactory
 import com.am.carly.ui.cars.CarsActivity
+import com.am.carly.ui.login.StartActivity
+import com.am.carly.ui.profile.ProfileActivity
 import com.bumptech.glide.Glide
+import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.android.synthetic.main.activity_cities.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
 
-class CitiesActivity : BaseActivity(), KodeinAware {
+class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationItemSelectedListener {
     override val kodein by kodein()
     private val mFactory: CitiesViewModelFactory by instance()
     private lateinit var mBinding: ActivityCitiesBinding
     private lateinit var mViewModel: CitiesViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cities)
+        mBinding = DataBindingUtil.setContentView(this, com.am.carly.R.layout.activity_cities)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CitiesViewModel::class.java)
 
+        val toolbar: Toolbar = findViewById(com.am.carly.R.id.toolbar)
+        setSupportActionBar(toolbar)
         loadCitiesFromFireStore()
+
+
+        val drawerLayout: DrawerLayout = findViewById(com.am.carly.R.id.drawer_layout)
+        val navView: NavigationView = findViewById(com.am.carly.R.id.nav_view)
+        navView.getHeaderView(0).setOnClickListener {
+            startActivity(Intent(this@CitiesActivity , ProfileActivity::class.java))
+        }
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            toolbar,
+            com.am.carly.R.string.navigation_drawer_open,
+            com.am.carly.R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navView.setNavigationItemSelectedListener(this)
+
+
     }
 
     private fun loadCitiesFromFireStore() {
@@ -56,7 +86,8 @@ class CitiesActivity : BaseActivity(), KodeinAware {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityHolder {
 
                 val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                val binding = DataBindingUtil.inflate<ItemCityBinding>(inflater, R.layout.item_city, parent, false)
+                val binding =
+                    DataBindingUtil.inflate<ItemCityBinding>(inflater, com.am.carly.R.layout.item_city, parent, false)
 
                 return CityHolder(binding)
             }
@@ -65,7 +96,7 @@ class CitiesActivity : BaseActivity(), KodeinAware {
         citiesRecyclerView.layoutManager = LinearLayoutManager(this@CitiesActivity)
     }
 
-    inner class CityHolder(var binding: ItemCityBinding) : RecyclerView.ViewHolder(binding.root) , View.OnClickListener {
+    inner class CityHolder(var binding: ItemCityBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
@@ -77,9 +108,73 @@ class CitiesActivity : BaseActivity(), KodeinAware {
         }
 
         override fun onClick(v: View?) {
-            startActivity(Intent(this@CitiesActivity , CarsActivity::class.java))
+            startActivity(Intent(this@CitiesActivity, CarsActivity::class.java))
         }
 
+    }
+
+
+    override fun onBackPressed() {
+        val drawerLayout: DrawerLayout = findViewById(com.am.carly.R.id.drawer_layout)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(com.am.carly.R.menu.cities_activityy, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            com.am.carly.R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        when (item.itemId) {
+            com.am.carly.R.id.navAbout -> {
+                LibsBuilder()
+                    .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                    .withAboutIconShown(true)
+                    .withAboutVersionShown(true)
+                    .withAboutDescription(getString(com.am.carly.R.string.about_libraries_description))
+                    .withFields(com.am.carly.R.string::class.java.fields)
+                    .start(this@CitiesActivity)
+            }
+            com.am.carly.R.id.navBugReport -> {
+                IssueReporterLauncher.forTarget("Abed-Murad", "Carly")
+                    .guestToken("54a7b82d0f9757f7fb85347d7b64950161507b48")
+                    .guestEmailRequired(false)
+                    .minDescriptionLength(20)
+                    .homeAsUpEnabled(true)
+                    .launch(this@CitiesActivity)
+            }
+            com.am.carly.R.id.navLogOut -> {
+
+                AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener {
+                        // user is now signed out
+                        startActivity(Intent(this@CitiesActivity, StartActivity::class.java))
+                        finish()
+                    }
+
+            }
+        }
+        val drawerLayout: DrawerLayout = findViewById(com.am.carly.R.id.drawer_layout)
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 
 

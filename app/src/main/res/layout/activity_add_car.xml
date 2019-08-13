@@ -63,6 +63,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
+                        android:text="@{viewModel.name}"
                         android:layout_height="wrap_content"
                         android:hint="Car model &amp; year "/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -77,6 +78,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
+                        android:text="@{viewModel.pricePerDay}"
                         android:layout_height="wrap_content"
                         android:hint="Price per hour"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -96,6 +98,7 @@
                         android:inputType="textMultiLine"
                         android:lines="8"
                         android:minLines="6"
+                        android:text="@{viewModel.description}"
                         android:gravity="top|left"
                         android:maxLines="10"
                         android:layout_height="wrap_content"
@@ -117,6 +120,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:inputType="number"
+                        android:text="@{viewModel.doorsCount}"
                         android:layout_height="wrap_content"
                         android:hint="Doors count"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -124,11 +128,11 @@
 
             <Switch
                     android:layout_width="0dp"
-                    android:checked="false"
                     android:text="Automatic Transmission"
                     android:textOff="Manual"
                     android:textOn="Automatic"
                     android:layout_height="wrap_content"
+                    android:checked="@{viewModel.transmission}"
                     android:id="@+id/switch1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -137,10 +141,11 @@
                     android:layout_marginStart="8dp"/>
             <Switch
                     android:layout_width="0dp"
-                    android:checked="true"
                     android:text="Full to Full (fuel policy)"
                     android:textOff="Manual"
                     android:textOn="Automatic"
+                    android:checked="@{viewModel.fullToFull}"
+
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@+id/nextButton"
                     android:id="@+id/switch2"
