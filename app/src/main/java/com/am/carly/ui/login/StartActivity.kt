@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.am.carly.BuildConfig
 import com.am.carly.R
+import com.am.carly.ui.cars.AddCarActivity
 import com.am.carly.ui.cities.CitiesActivity
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +21,7 @@ class StartActivity : AppCompatActivity() {
 
         }
         SignUpButton.setOnClickListener {
-            startFirebaseUiForAuth()
+            startActivity(Intent(this@StartActivity , AddCarActivity::class.java))
 
         }
     }
