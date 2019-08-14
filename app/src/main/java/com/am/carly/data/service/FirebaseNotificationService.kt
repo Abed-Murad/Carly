@@ -44,8 +44,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
             val dataJSOJN = JSONObject(remoteMessage.data)
-            val extraInformation = dataJSOJN.getString("extra_inforamtion")
-            sendNotification(extraInformation)
+            sendNotification("extra_inforamtion")
 
             // Check if message contains a notification payload.
             remoteMessage.notification?.let {

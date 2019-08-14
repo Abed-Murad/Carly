@@ -5,6 +5,7 @@ import com.am.carly.data.local.LoginPref
 import com.am.carly.data.remote.MyApi
 import com.am.carly.data.repository.UserRepository
 import com.am.carly.ui.base.viewmodelfactory.*
+import com.google.firebase.analytics.FirebaseAnalytics
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -34,5 +35,6 @@ class MyApplication : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseAnalytics.getInstance(this)
     }
 }
