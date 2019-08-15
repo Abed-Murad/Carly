@@ -10,7 +10,10 @@ import com.am.carly.ui.cities.CitiesViewModelFactory
 import com.am.carly.ui.login.AddCarViewModelFactory
 import com.am.carly.ui.maps.ChooseLocationViewModelFactory
 import com.am.carly.ui.maps.MapViewViewModelFactory
+import com.am.carly.ui.payment.PaymentActivityViewModelFactory
+import com.am.carly.ui.payment.PaymentSuccessActivityViewModelFactory
 import com.am.carly.ui.policies.PoliciesViewModelFactory
+import com.am.carly.ui.profile.ProfileViewModelFactory
 import com.am.carly.ui.rent.DateRangeViewModelFactory
 import com.am.carly.ui.splash.SplashViewModelFactory
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -38,6 +41,9 @@ class MyApplication : Application(), KodeinAware {
         bind() from provider { MapViewViewModelFactory(instance()) }
         bind() from provider { DateRangeViewModelFactory(instance()) }
         bind() from provider { CarDetailsViewModelFactory(instance()) }
+        bind() from provider { PaymentSuccessActivityViewModelFactory(instance()) }
+        bind() from provider { PaymentActivityViewModelFactory(instance()) }
+        bind() from provider { ProfileViewModelFactory(instance()) }
         bind() from singleton { UserRepository(instance(), instance()) }
     }
 
