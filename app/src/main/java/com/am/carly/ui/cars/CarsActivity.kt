@@ -15,7 +15,6 @@ import com.am.carly.data.model.Car
 import com.am.carly.databinding.ActivityCarsBinding
 import com.am.carly.databinding.ItemCarBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.CarsViewModelFactory
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions

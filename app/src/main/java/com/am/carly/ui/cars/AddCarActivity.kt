@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.am.carly.databinding.ActivityAddCarBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.AddCarViewModelFactory
+import com.am.carly.ui.login.AddCarViewModelFactory
 import com.esafirm.imagepicker.features.ImagePicker
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein

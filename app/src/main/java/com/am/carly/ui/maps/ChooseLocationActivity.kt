@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.am.carly.databinding.ActivityChooseLcationBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.ChooseLocationViewModelFactory
 import com.am.carly.ui.maps.MapViewActivity.Companion.GAZA_STRIP_CENTER_LAT_LNG
 import com.am.carly.ui.maps.MapViewActivity.Companion.MAP_GAZA_ZOOM_SCALE
 import com.google.android.gms.maps.CameraUpdateFactory

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
 import com.am.carly.databinding.ActivityDateRangeBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.DateRangeViewModelFactory
 import com.squareup.timessquare.CalendarPickerView
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein

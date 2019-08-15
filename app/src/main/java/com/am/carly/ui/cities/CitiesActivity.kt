@@ -3,7 +3,10 @@ package com.am.carly.ui.cities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -12,11 +15,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.am.carly.R
 import com.am.carly.data.model.City
 import com.am.carly.databinding.ActivityCitiesBinding
 import com.am.carly.databinding.ItemCityBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.CitiesViewModelFactory
+import com.am.carly.ui.cars.AddCarActivity
 import com.am.carly.ui.cars.CarsActivity
 import com.am.carly.ui.login.StartActivity
 import com.am.carly.ui.profile.ProfileActivity
@@ -50,10 +54,10 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
         loadCitiesFromFireStore()
 
 
-        val drawerLayout: DrawerLayout = findViewById(com.am.carly.R.id.drawer_layout)
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(com.am.carly.R.id.nav_view)
         navView.getHeaderView(0).setOnClickListener {
-            startActivity(Intent(this@CitiesActivity , ProfileActivity::class.java))
+            startActivity(Intent(this@CitiesActivity, ProfileActivity::class.java))
         }
         val toggle = ActionBarDrawerToggle(
             this,
@@ -110,12 +114,11 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
         override fun onClick(v: View?) {
             startActivity(Intent(this@CitiesActivity, CarsActivity::class.java))
         }
-
     }
 
 
     override fun onBackPressed() {
-        val drawerLayout: DrawerLayout = findViewById(com.am.carly.R.id.drawer_layout)
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
@@ -123,27 +126,11 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(com.am.carly.R.menu.cities_activityy, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            com.am.carly.R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            com.am.carly.R.id.navAbout -> {
+            R.id.navAbout -> {
                 LibsBuilder()
                     .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                     .withAboutIconShown(true)
@@ -152,7 +139,7 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
                     .withFields(com.am.carly.R.string::class.java.fields)
                     .start(this@CitiesActivity)
             }
-            com.am.carly.R.id.navBugReport -> {
+            R.id.navBugReport -> {
                 IssueReporterLauncher.forTarget("Abed-Murad", "Carly")
                     .guestToken("54a7b82d0f9757f7fb85347d7b64950161507b48")
                     .guestEmailRequired(false)
@@ -160,7 +147,7 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
                     .homeAsUpEnabled(true)
                     .launch(this@CitiesActivity)
             }
-            com.am.carly.R.id.navLogOut -> {
+            R.id.navLogOut -> {
 
                 AuthUI.getInstance()
                     .signOut(this)
@@ -171,8 +158,11 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
                     }
 
             }
+            R.id.navAddCar -> {
+                startActivity(Intent(this@CitiesActivity, AddCarActivity::class.java))
+            }
         }
-        val drawerLayout: DrawerLayout = findViewById(com.am.carly.R.id.drawer_layout)
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }

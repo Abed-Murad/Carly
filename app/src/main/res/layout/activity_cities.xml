@@ -57,7 +57,7 @@
                 android:layout_gravity="start"
                 android:fitsSystemWindows="true"
                 app:headerLayout="@layout/nav_header_cities_activityy"
-                app:menu="@menu/activity_cities_activityy_drawer"/>
+                app:menu="@menu/menu_cities"/>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

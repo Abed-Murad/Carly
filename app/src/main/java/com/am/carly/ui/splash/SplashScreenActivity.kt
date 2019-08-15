@@ -6,8 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.am.carly.data.model.LoginInfo
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.SplashViewModelFactory
-import com.am.carly.ui.login.LoginActivity
 import com.am.carly.ui.login.StartActivity
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein

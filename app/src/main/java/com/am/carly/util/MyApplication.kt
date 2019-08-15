@@ -4,7 +4,15 @@ import android.app.Application
 import com.am.carly.data.local.LoginPref
 import com.am.carly.data.remote.MyApi
 import com.am.carly.data.repository.UserRepository
-import com.am.carly.ui.base.viewmodelfactory.*
+import com.am.carly.ui.cars.CarDetailsViewModelFactory
+import com.am.carly.ui.cars.CarsViewModelFactory
+import com.am.carly.ui.cities.CitiesViewModelFactory
+import com.am.carly.ui.login.AddCarViewModelFactory
+import com.am.carly.ui.maps.ChooseLocationViewModelFactory
+import com.am.carly.ui.maps.MapViewViewModelFactory
+import com.am.carly.ui.policies.PoliciesViewModelFactory
+import com.am.carly.ui.rent.DateRangeViewModelFactory
+import com.am.carly.ui.splash.SplashViewModelFactory
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

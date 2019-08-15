@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
 import com.am.carly.databinding.ActivityPoliciesBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.PoliciesViewModelFactory
 import com.google.android.gms.maps.GoogleMap
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein

@@ -1,4 +1,4 @@
-package com.am.carly.ui.base.viewmodelfactory
+package com.am.carly.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

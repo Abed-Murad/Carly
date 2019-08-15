@@ -1,9 +1,8 @@
-package com.am.carly.ui.base.viewmodelfactory
+package com.am.carly.ui.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.am.carly.data.repository.UserRepository
-import com.am.carly.ui.splash.SplashViewModel
 
 class SplashViewModelFactory constructor(private val userRepository: UserRepository) : ViewModelProvider.Factory {
 

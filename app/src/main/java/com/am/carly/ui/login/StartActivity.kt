@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.am.carly.BuildConfig
 import com.am.carly.R
-import com.am.carly.ui.cars.AddCarActivity
 import com.am.carly.ui.cities.CitiesActivity
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -21,8 +20,7 @@ class StartActivity : AppCompatActivity() {
 
         }
         SignUpButton.setOnClickListener {
-            startActivity(Intent(this@StartActivity , AddCarActivity::class.java))
-
+            startFirebaseUiForAuth()
         }
     }
 
@@ -50,12 +48,13 @@ class StartActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null && currentUser.email != null) {
             startActivity(Intent(this@StartActivity , CitiesActivity::class.java))
         }
+        super.onActivityResult(requestCode, resultCode, data)
+
     }
 
 }

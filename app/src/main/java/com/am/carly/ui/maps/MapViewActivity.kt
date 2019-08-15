@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
 import com.am.carly.databinding.ActivityMapViewBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.MapViewViewModelFactory
 import com.am.carly.ui.cars.CarDetailsActivity
 import com.am.carly.util.FAKE
 import com.google.android.gms.maps.CameraUpdateFactory

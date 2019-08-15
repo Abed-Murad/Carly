@@ -8,7 +8,6 @@ import com.am.carly.R
 import com.am.carly.data.model.SliderImage
 import com.am.carly.databinding.ActivityCarDetailsBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.base.viewmodelfactory.CarDetailsViewModelFactory
 import com.am.carly.ui.maps.MapViewActivity
 import com.am.carly.util.FAKE
 import com.google.android.gms.maps.CameraUpdateFactory

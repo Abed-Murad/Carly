@@ -1,9 +1,8 @@
-package com.am.carly.ui.base.viewmodelfactory
+package com.am.carly.ui.cities
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.am.carly.data.repository.UserRepository
-import com.am.carly.ui.cities.CitiesViewModel
 
 class CitiesViewModelFactory constructor(private val userRepository: UserRepository) : ViewModelProvider.Factory {
 
