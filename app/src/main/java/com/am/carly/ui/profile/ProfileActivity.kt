@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.am.carly.R
 import com.am.carly.data.model.Car
+import com.am.carly.databinding.ActivityProfileBinding
 import com.am.carly.databinding.ItemCarBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.cars.CarDetailsActivity
@@ -19,11 +21,24 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_cars.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class ProfileActivity : BaseActivity() {
+
+class ProfileActivity : BaseActivity(), KodeinAware {
+
+    override val kodein by kodein()
+    private val mFactory: ProfileViewModelFactory by instance()
+    private lateinit var mBinding: ActivityProfileBinding
+    private lateinit var mViewModel: ProfileViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile)
+        mViewModel = ViewModelProviders.of(this, mFactory).get(ProfileViewModel::class.java)
+        mBinding.viewModel = mViewModel
+
         loadCarsFromFireStore()
     }
 
@@ -40,7 +55,8 @@ class ProfileActivity : BaseActivity() {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarHolder {
                 val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                val binding = DataBindingUtil.inflate<ItemCarBinding>(inflater, R.layout.item_car, parent, false)
+                val binding =
+                    DataBindingUtil.inflate<ItemCarBinding>(inflater, R.layout.item_car, parent, false)
                 return CarHolder(binding)
             }
         }
@@ -49,7 +65,8 @@ class ProfileActivity : BaseActivity() {
     }
 
 
-    inner class CarHolder(var binding: ItemCarBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+    inner class CarHolder(var binding: ItemCarBinding) : RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener {
         init {
             itemView.setOnClickListener(this)
         }

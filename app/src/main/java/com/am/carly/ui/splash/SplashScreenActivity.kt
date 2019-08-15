@@ -32,11 +32,6 @@ class SplashScreenActivity : BaseActivity(), KodeinAware {
         })
     }
 
-    private fun startLoginActivity() {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
-    }
-
     private fun startMainActivity(loginInfo: LoginInfo?) {
         startActivity(Intent(this, StartActivity::class.java).also {
             //            it.putExtra(Constants.KEY_DRIVER_INFO, driverInfo)
