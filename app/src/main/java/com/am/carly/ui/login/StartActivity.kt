@@ -38,7 +38,7 @@ class StartActivity : AppCompatActivity() {
         val intent = AuthUI.getInstance().createSignInIntentBuilder()
             .setIsSmartLockEnabled(!BuildConfig.DEBUG, true)
             .setAvailableProviders(providers)
-            .setLogo(R.drawable.ic_launcher)
+            .setLogo(R.drawable.ic_launcher_trans)
             .setTheme(R.style.LoginTheme)
             .setTosAndPrivacyPolicyUrls(URL_TERMS_OF_SERVICE, URL_TERMS_OF_SERVICE)
             .build()
