@@ -4,20 +4,27 @@
       tools:showIn="navigation_view">
 
 
-            <item
-                    android:id="@+id/navAbout"
-                    android:icon="@drawable/ic_info"
-                    android:title="About" />
-            <item
-                    android:id="@+id/navBugReport"
-                    android:icon="@drawable/ic_bug_report"
-                    android:title="Report a Bug" />
-            <item
-                    android:id="@+id/navLogOut"
-                    android:icon="@drawable/ic_log_out"
-                    android:title="Logout" />
-    <item
-                    android:id="@+id/navAddCar"
-                    android:icon="@drawable/ic_car"
-                    android:title="Rent your car" />
+
+    <group android:checkableBehavior="single"
+           android:id="@+id/group1">
+
+        <item
+                android:id="@+id/navAddCar"
+                android:icon="@drawable/ic_car"
+                android:title="Rent your car"/>
+    </group>
+
+    <group android:checkableBehavior="single"
+           android:id="@+id/group2">
+        <item
+                android:id="@+id/navBugReport"
+                android:icon="@drawable/ic_bug_report"
+                android:title="Report a Bug"/>
+
+        <item
+                android:id="@+id/navAbout"
+                android:icon="@drawable/ic_info"
+                android:title="About"/>
+</group>
+
 </menu>

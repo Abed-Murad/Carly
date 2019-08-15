@@ -20,7 +20,6 @@ import com.am.carly.data.model.City
 import com.am.carly.databinding.ActivityCitiesBinding
 import com.am.carly.databinding.ItemCityBinding
 import com.am.carly.ui.base.BaseActivity
-import com.am.carly.ui.cars.AddCarActivity
 import com.am.carly.ui.cars.CarsActivity
 import com.am.carly.ui.login.StartActivity
 import com.am.carly.ui.profile.ProfileActivity
@@ -48,7 +47,7 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cities)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CitiesViewModel::class.java)
-
+        mBinding.viewModel = mViewModel
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         loadCitiesFromFireStore()
@@ -56,14 +55,14 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
-        navView.getHeaderView(0).setOnClickListener {
+        navView.getHeaderView(0).findViewById<View>(R.id.clickView).setOnClickListener {
             startActivity(Intent(this@CitiesActivity, ProfileActivity::class.java))
         }
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
             toolbar,
-            com.am.carly.R.string.navigation_drawer_open,
+            R.string.navigation_drawer_open,
             com.am.carly.R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
@@ -147,7 +146,7 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
                     .homeAsUpEnabled(true)
                     .launch(this@CitiesActivity)
             }
-            R.id.navLogOut -> {
+            R.id.logout -> {
 
                 AuthUI.getInstance()
                     .signOut(this)
@@ -158,9 +157,7 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
                     }
 
             }
-            R.id.navAddCar -> {
-                startActivity(Intent(this@CitiesActivity, AddCarActivity::class.java))
-            }
+
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
