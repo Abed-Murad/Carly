@@ -70,6 +70,7 @@
                 <TextView
                         android:id="@+id/logout"
                         android:layout_width="match_parent"
+                        android:drawableStart="@drawable/ic_log_out"
                         android:layout_height="wrap_content"
                         android:onClick="@{viewModel::onLogoutBtnClick}"
                         android:textColor="@color/black"
