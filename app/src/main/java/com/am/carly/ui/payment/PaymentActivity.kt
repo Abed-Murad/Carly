@@ -6,14 +6,29 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
+import com.am.carly.databinding.ActivityPaymentBinding
 import com.am.carly.ui.base.BaseActivity
+import com.am.carly.util.insertPeriodically
 import kotlinx.android.synthetic.main.activity_payment.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class PaymentActivity : BaseActivity() {
+
+class PaymentActivity : BaseActivity(), KodeinAware {
+    override val kodein by kodein()
+    private val mFactory: PaymentActivityViewModelFactory by instance()
+    private lateinit var mBinding: ActivityPaymentBinding
+    private lateinit var mViewModel: PaymentActivityViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_payment)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_payment)
+        mViewModel = ViewModelProviders.of(this, mFactory).get(PaymentActivityViewModel::class.java)
+        mBinding.viewModel = mViewModel
 
         setupTextChangeListeners()
         payBtn.setOnClickListener {
@@ -112,17 +127,5 @@ class PaymentActivity : BaseActivity() {
         })
     }
 
-    fun insertPeriodically(text: String, insert: String, period: Int): String {
-        val builder = StringBuilder(text.length + insert.length * (text.length / period) + 1)
-        var index = 0
-        var prefix = ""
-        while (index < text.length) {
-            builder.append(prefix)
-            prefix = insert
-            builder.append(text.substring(index, Math.min(index + period, text.length)))
-            index += period
-        }
-        return builder.toString()
-    }
 
 }
