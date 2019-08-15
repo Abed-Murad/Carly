@@ -22,19 +22,16 @@ class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
 
 
     fun onNextBtnClick(view: View) {
-
-        val car =
-            Car(
-                name = name,
-                rating = null,
-                pricePerDay = pricePerDay,
-                description = description,
-                isFullToFullPolicy = isFullToFull,
-                automaticTransmission = transmission,
-                doorCount = doorsCount,
-                city = "Gaza"
-            )
-
+        val car = Car(
+            name = name,
+            rating = null,
+            pricePerDay = pricePerDay,
+            description = description,
+            isFullToFullPolicy = isFullToFull,
+            automaticTransmission = transmission,
+            doorCount = doorsCount,
+            city = "Gaza"
+        )
 
         FirebaseFirestore.getInstance().collection("cars_gaza").document("one")
             .set(car)
@@ -42,7 +39,6 @@ class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
             .addOnFailureListener { e -> Log.w("ttt", "Error writing document", e) }
 
         view.context.startActivity(Intent(view.context, ChooseLocationActivity::class.java))
-
     }
 
     fun pickImagesBtnClick(view: View) {

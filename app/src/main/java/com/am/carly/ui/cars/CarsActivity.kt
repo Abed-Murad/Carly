@@ -38,8 +38,6 @@ class CarsActivity : BaseActivity(), KodeinAware {
 
     }
 
-
-
     private fun loadCarsFromFireStore() {
         val query = FirebaseFirestore.getInstance().collection("cars_gaza")
         val options = FirestoreRecyclerOptions.Builder<Car>()

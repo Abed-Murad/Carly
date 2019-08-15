@@ -10,11 +10,6 @@ import com.am.carly.ui.maps.MapViewActivity
 
 class CarsViewModel(var userRepository: UserRepository) : ViewModel() {
 
-    var isLoading: LiveData<Boolean> = MutableLiveData()
-    fun getLoginInfo() = userRepository.getLoginInfo()
-
-
-
     fun onMapViewBtnClick(view: View) {
         view.context.startActivity(Intent(view.context, MapViewActivity::class.java))
     }

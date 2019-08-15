@@ -20,13 +20,13 @@ import java.util.List;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 
-public class AddCarImagesAdapter extends PagerAdapter {
+public class ImagesSliderAdapter extends PagerAdapter {
 
     private AppCompatActivity mContext;
     private LayoutInflater mLayoutInflater;
     private List<Image> mSliderImageList = new ArrayList<>();
 
-    public AddCarImagesAdapter(AppCompatActivity context) {
+    public ImagesSliderAdapter(AppCompatActivity context) {
         this.mContext = context;
         this.mLayoutInflater = (LayoutInflater)
                 mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.am.carly.data.model.LoginInfo
 
+/**
+ * Remove it if the FirebaseUser is better.
+ */
 class LoginPref(context: Context) {
     // Application Context is used to avoid memory leak.
     private val preference: SharedPreferences = context.getSharedPreferences(PREFS_LOGIN_CONFIG, Context.MODE_PRIVATE)

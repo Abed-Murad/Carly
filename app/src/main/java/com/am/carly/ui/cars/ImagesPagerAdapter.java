@@ -11,10 +11,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.am.carly.R;
-import com.am.carly.data.model.SliderImage;
+import com.am.carly.data.model.Image;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import jp.wasabeef.glide.transformations.BlurTransformation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -25,10 +26,10 @@ public class ImagesPagerAdapter extends PagerAdapter {
 
     private AppCompatActivity mContext;
     private LayoutInflater mLayoutInflater;
-    private ArrayList<SliderImage> mSliderImageList;
+    private ArrayList<Image> mImageList;
 
-    public ImagesPagerAdapter(AppCompatActivity context, ArrayList<SliderImage> sliderImageList) {
-        this.mSliderImageList = sliderImageList;
+    public ImagesPagerAdapter(AppCompatActivity context, ArrayList<Image> imageList) {
+        this.mImageList = imageList;
         this.mContext = context;
         this.mLayoutInflater = (LayoutInflater)
                 mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -37,29 +38,30 @@ public class ImagesPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mSliderImageList.size();
+        return mImageList.size();
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NotNull View view, @NotNull Object object) {
         return view == object;
     }
 
+    @NotNull
     @Override
-    public Object instantiateItem(ViewGroup container, final int position) {
+    public Object instantiateItem(@NotNull ViewGroup container, final int position) {
         View view = mLayoutInflater.inflate(R.layout.item_slide, null);
         ImageView imageView = view.findViewById(R.id.slideImageView);
         ImageView blurImageView = view.findViewById(R.id.blurImageView);
 
 
-        Glide.with(mContext).load(mSliderImageList.get(position).getImageUrl())
+        Glide.with(mContext).load(mImageList.get(position).getImageUrl())
                 .apply(bitmapTransform(new BlurTransformation(25)))
                 .thumbnail(0.5f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(blurImageView);
 
 
-        Glide.with(mContext).load(mSliderImageList.get(position).getImageUrl())
+        Glide.with(mContext).load(mImageList.get(position).getImageUrl())
                 .thumbnail(0.5f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
@@ -72,7 +74,7 @@ public class ImagesPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NotNull ViewGroup container, int position, @NotNull Object object) {
         ViewPager viewPager = (ViewPager) container;
         View view = (View) object;
         viewPager.removeView(view);
@@ -84,7 +86,7 @@ public class ImagesPagerAdapter extends PagerAdapter {
         String POSITION = "position";
         String SLIDE_SHOW = "slideshow";
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(IMAGES_LIST, mSliderImageList);
+        bundle.putParcelableArrayList(IMAGES_LIST, mImageList);
         bundle.putInt(POSITION, position);
         FragmentTransaction ft = mContext.getSupportFragmentManager().beginTransaction();
         ImagesSliderFragment newFragment = ImagesSliderFragment.newInstance();

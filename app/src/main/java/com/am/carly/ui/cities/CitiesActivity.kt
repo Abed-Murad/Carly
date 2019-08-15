@@ -46,16 +46,16 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
     private lateinit var mViewModel: CitiesViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, com.am.carly.R.layout.activity_cities)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cities)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CitiesViewModel::class.java)
 
-        val toolbar: Toolbar = findViewById(com.am.carly.R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         loadCitiesFromFireStore()
 
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(com.am.carly.R.id.nav_view)
+        val navView: NavigationView = findViewById(R.id.nav_view)
         navView.getHeaderView(0).setOnClickListener {
             startActivity(Intent(this@CitiesActivity, ProfileActivity::class.java))
         }

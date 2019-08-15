@@ -1,11 +1,12 @@
 package com.am.carly.ui.cars
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.am.carly.R
-import com.am.carly.data.model.SliderImage
+import com.am.carly.data.model.Image
 import com.am.carly.databinding.ActivityCarDetailsBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.maps.MapViewActivity
@@ -20,6 +21,7 @@ import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import java.util.*
 
+//TODO: Replace all the data in the views with a real data from the FireStore Database.
 class CarDetailsActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
     override val kodein by kodein()
     private val mFactory: CarDetailsViewModelFactory by instance()
@@ -35,6 +37,7 @@ class CarDetailsActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun setupImagesPager() {
         val imagesPagerAdapter = ImagesPagerAdapter(this, getFakeSliderImagesList())
         mBinding.imagesPager.adapter = imagesPagerAdapter
@@ -60,24 +63,22 @@ class CarDetailsActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
         })
 
     }
-
-
-    fun getFakeSliderImagesList(): ArrayList<SliderImage> {
-        val imagesList = ArrayList<SliderImage>()
+    fun getFakeSliderImagesList(): ArrayList<Image> {
+        val imagesList = ArrayList<Image>()
         imagesList.add(
-            SliderImage(
+            Image(
                 "Football Field",
                 FAKE.IMG_URL_FOOTBALL
             )
         )
         imagesList.add(
-            SliderImage(
+            Image(
                 "Stars At Night",
                 FAKE.IMG_URL_STARS
             )
         )
         imagesList.add(
-            SliderImage(
+            Image(
                 "Best Band Ever",
                 FAKE.IMG_URL_STARS
             )

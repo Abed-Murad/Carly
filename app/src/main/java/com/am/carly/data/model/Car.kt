@@ -11,7 +11,7 @@ data class Car(
     var isFullToFullPolicy: Boolean = false,
     var automaticTransmission: Boolean = false,
     var doorCount: String = "",
-    var location: GeoPoint? = null,
+    var location: GeoPoint? = GeoPoint(0.0, 0.0),
     var city: String = "",
     var ownerId: String = ""
 )

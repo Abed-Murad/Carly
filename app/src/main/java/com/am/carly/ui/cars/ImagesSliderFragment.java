@@ -1,5 +1,6 @@
 package com.am.carly.ui.cars;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +13,13 @@ import androidx.fragment.app.DialogFragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.am.carly.R;
-import com.am.carly.data.model.SliderImage;
+import com.am.carly.data.model.Image;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class ImagesSliderFragment extends DialogFragment {
@@ -25,32 +28,34 @@ public class ImagesSliderFragment extends DialogFragment {
     private final static String POSITION = "position";
 
     private String TAG = ImagesSliderFragment.class.getSimpleName();
-    private ArrayList<SliderImage> images;
+    private ArrayList<Image> images;
     private ViewPager viewPager;
-    private MyViewPagerAdapter myViewPagerAdapter;
     private TextView imagesCount;
-    private ImageView closeButton;
     private int selectedPosition = 0;
 
-    public static ImagesSliderFragment newInstance() {
+    static ImagesSliderFragment newInstance() {
         return new ImagesSliderFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_images_slider_dialog, container, false);
         viewPager = v.findViewById(R.id.viewpager);
         imagesCount = v.findViewById(R.id.imagesCount);
-        closeButton = v.findViewById(R.id.closeButton);
+        ImageView closeButton = v.findViewById(R.id.closeButton);
 
         closeButton.setOnClickListener(v1 -> dismiss());
-        images = getArguments().getParcelableArrayList(IMAGES_LIST);
-        selectedPosition = getArguments().getInt(POSITION);
+        if (getArguments() != null) {
+            images = getArguments().getParcelableArrayList(IMAGES_LIST);
+        }
+        if (getArguments() != null) {
+            selectedPosition = getArguments().getInt(POSITION);
+        }
 
         Log.e(TAG, "position: " + selectedPosition);
         Log.e(TAG, "images size: " + images.size());
 
-        myViewPagerAdapter = new MyViewPagerAdapter();
+        MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
 
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
@@ -66,7 +71,7 @@ public class ImagesSliderFragment extends DialogFragment {
     }
 
     //	page change listener
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+    private ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageSelected(int position) {
@@ -84,9 +89,10 @@ public class ImagesSliderFragment extends DialogFragment {
         }
     };
 
+    @SuppressLint("SetTextI18n")
     private void displayMetaInfo(int position) {
         imagesCount.setText((position + 1) + " of " + images.size());
-        SliderImage image = images.get(position);
+        Image image = images.get(position);
 
     }
 
@@ -103,17 +109,18 @@ public class ImagesSliderFragment extends DialogFragment {
         MyViewPagerAdapter() {
         }
 
+        @NotNull
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(@NotNull ViewGroup container, int position) {
 
-            layoutInflater = (LayoutInflater) getActivity().getSystemService(
+            layoutInflater = (LayoutInflater) Objects.requireNonNull(getActivity()).getSystemService(
                     Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(
                     R.layout.image_fullscreen_preview, container, false);
 
             ImageView imageViewPreview = view.findViewById(R.id.image_preview);
 
-            SliderImage image = images.get(position);
+            Image image = images.get(position);
             Glide.with(getActivity()).load(image.getImageUrl())
                     .thumbnail(0.5f)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -130,13 +137,13 @@ public class ImagesSliderFragment extends DialogFragment {
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object obj) {
+        public boolean isViewFromObject(@NotNull View view, @NotNull Object obj) {
             return view == obj;
         }
 
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NotNull ViewGroup container, int position, @NotNull Object object) {
             container.removeView((View) object);
         }
     }

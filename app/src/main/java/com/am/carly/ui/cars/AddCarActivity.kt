@@ -1,5 +1,6 @@
 package com.am.carly.ui.cars
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -19,22 +20,21 @@ class AddCarActivity : BaseActivity(), KodeinAware {
     private val mFactory: AddCarViewModelFactory by instance()
     private lateinit var mBinding: ActivityAddCarBinding
     private lateinit var mViewModel: AddCarViewModel
-    private lateinit var mImagesPagerAdapter: AddCarImagesAdapter
+    private lateinit var mImagesSliderAdapter: ImagesSliderAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, com.am.carly.R.layout.activity_add_car)
         mViewModel = ViewModelProviders.of(this, mFactory).get(AddCarViewModel::class.java)
         mBinding.viewModel = mViewModel
-        setupImagesPager()
+        setupImagesSlider()
     }
 
-
-    private fun setupImagesPager() {
-        mImagesPagerAdapter = AddCarImagesAdapter(this)
-        mBinding.imagesPager.adapter = mImagesPagerAdapter
-        val imagesCount = mImagesPagerAdapter.count
-
+    @SuppressLint("SetTextI18n")
+    private fun setupImagesSlider() {
+        mImagesSliderAdapter = ImagesSliderAdapter(this)
+        mBinding.imagesPager.adapter = mImagesSliderAdapter
+        val imagesCount = mImagesSliderAdapter.count
 
         mBinding.imagesPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
@@ -52,17 +52,14 @@ class AddCarActivity : BaseActivity(), KodeinAware {
 
             }
         })
-
     }
 
-
+    @SuppressLint("SetTextI18n")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
-
             val images = ImagePicker.getImages(data)
             mBinding.imageNumberTextView.text = "1 of ${images.size}"
-
-            mImagesPagerAdapter.updateImagesList(images)
+            mImagesSliderAdapter.updateImagesList(images)
         }
         super.onActivityResult(requestCode, resultCode, data)
 
