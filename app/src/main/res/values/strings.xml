@@ -42,4 +42,8 @@
     <string name="share_using">Share Using</string>
     <string name="hint_search">Search Posts</string>
     <string name="about_libraries_description">Developed by: \nGithub.com/Abed-Murad</string>
+    <string name="profile_activity_title">Profile</string>
+    <string name="payment_activity_title">Please enter you card details</string>
+    <string name="payment_success_activity_title">Successful payment</string>
+    <string name="policies_activity_title">Our Policies</string>
 </resources>
