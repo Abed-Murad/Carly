@@ -2,59 +2,44 @@ package com.am.carly.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.am.carly.BuildConfig
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
+import com.am.carly.databinding.ActivityStartBinding
+import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.cities.CitiesActivity
-import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_start.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class StartActivity : AppCompatActivity() {
+class StartActivity : BaseActivity(), KodeinAware {
+    override val kodein by kodein()
+    private val mFactory: StartActivityViewModelFactory by instance()
+    private lateinit var mBinding: ActivityStartBinding
+    private lateinit var mViewModel: StartActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        checkIfUserLoggedIn()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_start)
-        logInButton.setOnClickListener {
-            startFirebaseUiForAuth()
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_start)
+        mViewModel = ViewModelProviders.of(this, mFactory).get(StartActivityViewModel::class.java)
+        mBinding.viewModel = mViewModel
 
-        }
-        SignUpButton.setOnClickListener {
-            startFirebaseUiForAuth()
-        }
     }
 
-
-    private fun startFirebaseUiForAuth() {
-        val URL_TERMS_OF_SERVICE = "https://www.kabam.com/corporate/terms-of-service.html"
-        val FIREBASE_UI_SIGN_IN_REQUEST_CODE = 1010
-
-        val providers = listOf(
-            AuthUI.IdpConfig.GoogleBuilder().build(),
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.PhoneBuilder().build()
-        )
-
-        val intent = AuthUI.getInstance().createSignInIntentBuilder()
-            .setIsSmartLockEnabled(!BuildConfig.DEBUG, true)
-            .setAvailableProviders(providers)
-            .setLogo(R.drawable.ic_launcher_trans)
-            .setTheme(R.style.LoginTheme)
-            .setTosAndPrivacyPolicyUrls(URL_TERMS_OF_SERVICE, URL_TERMS_OF_SERVICE)
-            .build()
-
-        startActivityForResult(intent, FIREBASE_UI_SIGN_IN_REQUEST_CODE)
+    private fun checkIfUserLoggedIn() {
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            startActivity(Intent(this@StartActivity, CitiesActivity::class.java))
+            this@StartActivity.finish()
+        }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null && currentUser.email != null) {
-            startActivity(Intent(this@StartActivity , CitiesActivity::class.java))
-        }
+        checkIfUserLoggedIn()
         super.onActivityResult(requestCode, resultCode, data)
 
     }
+
 
 }

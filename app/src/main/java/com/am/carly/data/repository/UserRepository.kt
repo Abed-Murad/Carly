@@ -3,7 +3,6 @@ package com.am.carly.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.am.carly.data.local.LoginPref
-import com.am.carly.data.model.City
 import com.am.carly.data.model.LoginInfo
 import com.am.carly.data.remote.MyApi
 import com.google.firebase.firestore.FirebaseFirestore

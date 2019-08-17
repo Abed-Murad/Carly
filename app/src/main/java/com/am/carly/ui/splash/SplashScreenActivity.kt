@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.am.carly.data.model.LoginInfo
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.login.StartActivity
 import org.kodein.di.KodeinAware
@@ -19,24 +18,13 @@ class SplashScreenActivity : BaseActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
 
         mSplashViewModel = ViewModelProviders.of(this, mFactory).get(SplashViewModel::class.java)
-        mSplashViewModel.getLoginInfo().observe(this, Observer { loginInfo ->
-
-
-            if (!loginInfo.token.isNullOrEmpty()) {
-                startMainActivity(loginInfo)
-            } else {
-//                startLoginActivity()
-//                startFirebaseUiForAuth()
-                startMainActivity(loginInfo)
-            }
+        mSplashViewModel.getLoginInfo().observe(this, Observer {
+            startStartActivity()
         })
     }
 
-    private fun startMainActivity(loginInfo: LoginInfo?) {
-        startActivity(Intent(this, StartActivity::class.java).also {
-            //            it.putExtra(Constants.KEY_DRIVER_INFO, driverInfo)
-        })
-        finish()
+    private fun startStartActivity() {
+        startActivity(Intent(this, StartActivity::class.java))
     }
 
 
