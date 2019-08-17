@@ -13,7 +13,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.am.carly.R;
-import com.am.carly.data.model.Image;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +27,7 @@ public class ImagesSliderFragment extends DialogFragment {
     private final static String POSITION = "position";
 
     private String TAG = ImagesSliderFragment.class.getSimpleName();
-    private ArrayList<Image> images;
+    private ArrayList<String> images;
     private ViewPager viewPager;
     private TextView imagesCount;
     private int selectedPosition = 0;
@@ -46,7 +45,7 @@ public class ImagesSliderFragment extends DialogFragment {
 
         closeButton.setOnClickListener(v1 -> dismiss());
         if (getArguments() != null) {
-            images = getArguments().getParcelableArrayList(IMAGES_LIST);
+            images = getArguments().getStringArrayList(IMAGES_LIST);
         }
         if (getArguments() != null) {
             selectedPosition = getArguments().getInt(POSITION);
@@ -92,7 +91,7 @@ public class ImagesSliderFragment extends DialogFragment {
     @SuppressLint("SetTextI18n")
     private void displayMetaInfo(int position) {
         imagesCount.setText((position + 1) + " of " + images.size());
-        Image image = images.get(position);
+        String image = images.get(position);
 
     }
 
@@ -120,8 +119,8 @@ public class ImagesSliderFragment extends DialogFragment {
 
             ImageView imageViewPreview = view.findViewById(R.id.image_preview);
 
-            Image image = images.get(position);
-            Glide.with(getActivity()).load(image.getImageUrl())
+            String image = images.get(position);
+            Glide.with(getActivity()).load(image)
                     .thumbnail(0.5f)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageViewPreview);

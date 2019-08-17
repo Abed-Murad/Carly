@@ -18,7 +18,7 @@
                 android:layout_height="match_parent">
 
             <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/carImageView"
                     android:layout_width="377dp"
                     android:layout_height="194dp"
                     android:scaleType="centerCrop"
@@ -28,14 +28,14 @@
                     app:srcCompat="@drawable/car_one"/>
 
             <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/nameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="BMW 4 SERIES 2014"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+                    app:layout_constraintTop_toBottomOf="@+id/carImageView"/>
 
             <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     style="@style/Widget.MaterialRatingBar.RatingBar"
@@ -44,12 +44,12 @@
                     android:id="@+id/ratingBar"
                     android:layout_marginStart="8dp"
                     android:isIndicator="true"
-                    android:progress="90"
+                    android:progress="55"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/nameTextView"/>
 
             <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/pricePerDayTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -57,7 +57,7 @@
                     android:background="@drawable/rounded_corner_all"
                     android:padding="4dp"
                     android:text="150 SIN/day"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/carImageView"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -21,17 +22,18 @@ import com.am.carly.databinding.ActivityCitiesBinding
 import com.am.carly.databinding.ItemCityBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.cars.CarsActivity
-import com.am.carly.ui.login.StartActivity
 import com.am.carly.ui.profile.ProfileActivity
+import com.am.carly.util.PARM_CITY_CODE
 import com.bumptech.glide.Glide
-import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
+import com.mikhaellopez.circularimageview.CircularImageView
 import kotlinx.android.synthetic.main.activity_cities.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -43,6 +45,7 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
     private val mFactory: CitiesViewModelFactory by instance()
     private lateinit var mBinding: ActivityCitiesBinding
     private lateinit var mViewModel: CitiesViewModel
+    private lateinit var mNavView: NavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cities)
@@ -52,12 +55,11 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
         setSupportActionBar(toolbar)
         loadCitiesFromFireStore()
 
-
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        navView.getHeaderView(0).findViewById<View>(R.id.clickView).setOnClickListener {
-            startActivity(Intent(this@CitiesActivity, ProfileActivity::class.java))
-        }
+        mNavView = findViewById(R.id.nav_view)
+        populateNabHeaderViews()
+
+
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
@@ -68,9 +70,30 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.setNavigationItemSelectedListener(this)
+        mNavView.setNavigationItemSelectedListener(this)
 
 
+    }
+
+    private fun populateNabHeaderViews() {
+        val navHeaderView = mNavView.getHeaderView(0)
+
+        navHeaderView.findViewById<View>(R.id.clickView).setOnClickListener {
+            startActivity(Intent(this@CitiesActivity, ProfileActivity::class.java))
+        }
+
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            // Name, email address, and profile photo Url
+            val name = user.displayName
+            val email = user.email
+            val photoUrl = user.photoUrl
+
+            navHeaderView.findViewById<TextView>(R.id.userNameTextView).text = name
+            navHeaderView.findViewById<TextView>(R.id.userEmailTextView).text = email
+            Glide.with(this@CitiesActivity).load(photoUrl)
+                .into(navHeaderView.findViewById<CircularImageView>(R.id.userImageView))
+        }
     }
 
     private fun loadCitiesFromFireStore() {
@@ -90,7 +113,7 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
 
                 val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 val binding =
-                    DataBindingUtil.inflate<ItemCityBinding>(inflater, com.am.carly.R.layout.item_city, parent, false)
+                    DataBindingUtil.inflate<ItemCityBinding>(inflater, R.layout.item_city, parent, false)
 
                 return CityHolder(binding)
             }
@@ -100,18 +123,22 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
     }
 
     inner class CityHolder(var binding: ItemCityBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        private lateinit var mCity: City
 
         init {
             itemView.setOnClickListener(this)
         }
 
         fun bind(city: City) {
+            mCity = city
             Glide.with(binding.root.context).load(city.imgPath).into(binding.cityImageView)
             binding.cityNameTextView.text = city.name
         }
 
         override fun onClick(v: View?) {
-            startActivity(Intent(this@CitiesActivity, CarsActivity::class.java))
+            startActivity(Intent(this@CitiesActivity, CarsActivity::class.java).also {
+                it.putExtra(PARM_CITY_CODE, mCity.name)
+            })
         }
     }
 
@@ -146,17 +173,7 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
                     .homeAsUpEnabled(true)
                     .launch(this@CitiesActivity)
             }
-            R.id.logout -> {
 
-                AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener {
-                        // user is now signed out
-                        startActivity(Intent(this@CitiesActivity, StartActivity::class.java))
-                        finish()
-                    }
-
-            }
 
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)

@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="viewModel" type="com.am.carly.ui.cars.CarDetailsViewModel"/>
+        <variable name="car" type="com.am.carly.data.model.Car"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -12,12 +13,10 @@
         <ScrollView android:layout_width="match_parent"
                     app:layout_constraintBottom_toTopOf="@id/nextButton"
                     android:id="@+id/scrollView"
-                    android:layout_height="wrap_content"
-        >
+                    android:layout_height="wrap_content">
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-            >
+                    android:layout_height="wrap_content">
 
                 <com.google.android.material.appbar.AppBarLayout
                         android:id="@+id/app_bar"
@@ -27,8 +26,7 @@
                         android:theme="@style/AppTheme.AppBarOverlay"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                >
+                        app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.appbar.CollapsingToolbarLayout
                             android:id="@+id/toolbar_layout"

@@ -1,5 +1,6 @@
 package com.am.carly.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.am.carly.ui.cars.CarDetailsActivity
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_cars.*
 import org.kodein.di.KodeinAware
@@ -38,9 +40,26 @@ class ProfileActivity : BaseActivity(), KodeinAware {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile)
         mViewModel = ViewModelProviders.of(this, mFactory).get(ProfileViewModel::class.java)
         mBinding.viewModel = mViewModel
-
+        populateUserDetails()
         loadCarsFromFireStore()
+
     }
+
+    private fun populateUserDetails() {
+
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            // Name, email address, and profile photo Url
+            val name = user.displayName
+            val email = user.email
+            val photoUrl = user.photoUrl
+            mBinding.userNameTextView.text = name
+            mBinding.userEmailTextView.text = email
+
+            Glide.with(this@ProfileActivity).load(photoUrl).into(mBinding.userImageView)
+        }
+    }
+
 
     private fun loadCarsFromFireStore() {
         val query = FirebaseFirestore.getInstance().collection("cars_gaza")
@@ -71,11 +90,14 @@ class ProfileActivity : BaseActivity(), KodeinAware {
             itemView.setOnClickListener(this)
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(car: Car) {
-            if (car.imagesList.isNotEmpty()) {
-                Glide.with(binding.root.context).load(car.imagesList[0]).into(binding.imageView)
+            if (car.imagesList!!.isNotEmpty()) {
+                Glide.with(binding.root.context).load(car.imagesList!![0]).into(binding.carImageView)
             }
-            binding.textView.text = car.name
+            binding.nameTextView.text = car.name
+            binding.ratingBar.progress = car.rating!!
+            binding.pricePerDayTextView.text = "${car.pricePerDay} SIN/day"
         }
 
         override fun onClick(v: View?) {

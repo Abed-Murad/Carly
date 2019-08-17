@@ -6,11 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.am.carly.R
-import com.am.carly.data.model.Image
+import com.am.carly.data.model.Car
 import com.am.carly.databinding.ActivityCarDetailsBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.maps.MapViewActivity
-import com.am.carly.util.FAKE
+import com.am.carly.util.PARM_CAR_MODEL
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,7 +19,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
-import java.util.*
 
 //TODO: Replace all the data in the views with a real data from the FireStore Database.
 class CarDetailsActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
@@ -28,22 +27,26 @@ class CarDetailsActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
     private lateinit var mBinding: ActivityCarDetailsBinding
     private lateinit var mViewModel: CarDetailsViewModel
     private lateinit var mMap: GoogleMap
+    private lateinit var mCar: Car
+    private lateinit var mImagesSliderAdapter: ImagesPagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mCar = intent.extras.getParcelable(PARM_CAR_MODEL)
+
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_car_details)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CarDetailsViewModel::class.java)
         mBinding.viewModel = mViewModel
-        setupImagesPager()
+        mBinding.car = mCar
+        setupImagesSlider()
     }
 
 
     @SuppressLint("SetTextI18n")
-    private fun setupImagesPager() {
-        val imagesPagerAdapter = ImagesPagerAdapter(this, getFakeSliderImagesList())
-        mBinding.imagesPager.adapter = imagesPagerAdapter
-        val imagesCount = imagesPagerAdapter.count
-
-        mBinding.imageNumberTextView.text = "1 of $imagesCount"
+    private fun setupImagesSlider() {
+        mBinding.imageNumberTextView.text = "1 of ${mCar.imagesList!!.size}"
+        mImagesSliderAdapter = ImagesPagerAdapter(this , mCar.imagesList)
+        mBinding.imagesPager.adapter = mImagesSliderAdapter
+        val imagesCount = mImagesSliderAdapter.count
 
         mBinding.imagesPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
@@ -61,30 +64,8 @@ class CarDetailsActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
 
             }
         })
+    }
 
-    }
-    fun getFakeSliderImagesList(): ArrayList<Image> {
-        val imagesList = ArrayList<Image>()
-        imagesList.add(
-            Image(
-                "Football Field",
-                FAKE.IMG_URL_FOOTBALL
-            )
-        )
-        imagesList.add(
-            Image(
-                "Stars At Night",
-                FAKE.IMG_URL_STARS
-            )
-        )
-        imagesList.add(
-            Image(
-                "Best Band Ever",
-                FAKE.IMG_URL_STARS
-            )
-        )
-        return imagesList
-    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap

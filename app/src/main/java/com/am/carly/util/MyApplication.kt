@@ -8,6 +8,7 @@ import com.am.carly.ui.cars.CarDetailsViewModelFactory
 import com.am.carly.ui.cars.CarsViewModelFactory
 import com.am.carly.ui.cities.CitiesViewModelFactory
 import com.am.carly.ui.login.AddCarViewModelFactory
+import com.am.carly.ui.login.StartActivityViewModelFactory
 import com.am.carly.ui.maps.ChooseLocationViewModelFactory
 import com.am.carly.ui.maps.MapViewViewModelFactory
 import com.am.carly.ui.payment.PaymentActivityViewModelFactory
@@ -38,6 +39,7 @@ class MyApplication : Application(), KodeinAware {
         bind() from provider { CarsViewModelFactory(instance()) }
         bind() from provider { ChooseLocationViewModelFactory(instance()) }
         bind() from provider { PoliciesViewModelFactory(instance()) }
+        bind() from provider { StartActivityViewModelFactory(instance()) }
         bind() from provider { MapViewViewModelFactory(instance()) }
         bind() from provider { DateRangeViewModelFactory(instance()) }
         bind() from provider { CarDetailsViewModelFactory(instance()) }

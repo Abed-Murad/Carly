@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.am.carly.R;
-import com.am.carly.data.model.Image;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -26,9 +25,9 @@ public class ImagesPagerAdapter extends PagerAdapter {
 
     private AppCompatActivity mContext;
     private LayoutInflater mLayoutInflater;
-    private ArrayList<Image> mImageList;
+    private ArrayList<String> mImageList;
 
-    public ImagesPagerAdapter(AppCompatActivity context, ArrayList<Image> imageList) {
+    public ImagesPagerAdapter(AppCompatActivity context, ArrayList<String> imageList) {
         this.mImageList = imageList;
         this.mContext = context;
         this.mLayoutInflater = (LayoutInflater)
@@ -54,14 +53,14 @@ public class ImagesPagerAdapter extends PagerAdapter {
         ImageView blurImageView = view.findViewById(R.id.blurImageView);
 
 
-        Glide.with(mContext).load(mImageList.get(position).getImageUrl())
+        Glide.with(mContext).load(mImageList.get(position))
                 .apply(bitmapTransform(new BlurTransformation(25)))
                 .thumbnail(0.5f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(blurImageView);
 
 
-        Glide.with(mContext).load(mImageList.get(position).getImageUrl())
+        Glide.with(mContext).load(mImageList.get(position))
                 .thumbnail(0.5f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
@@ -86,7 +85,7 @@ public class ImagesPagerAdapter extends PagerAdapter {
         String POSITION = "position";
         String SLIDE_SHOW = "slideshow";
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(IMAGES_LIST, mImageList);
+        bundle.putStringArrayList(IMAGES_LIST, mImageList);
         bundle.putInt(POSITION, position);
         FragmentTransaction ft = mContext.getSupportFragmentManager().beginTransaction();
         ImagesSliderFragment newFragment = ImagesSliderFragment.newInstance();

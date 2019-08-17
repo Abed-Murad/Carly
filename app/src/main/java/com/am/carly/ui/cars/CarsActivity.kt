@@ -1,5 +1,6 @@
 package com.am.carly.ui.cars
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +16,8 @@ import com.am.carly.data.model.Car
 import com.am.carly.databinding.ActivityCarsBinding
 import com.am.carly.databinding.ItemCarBinding
 import com.am.carly.ui.base.BaseActivity
+import com.am.carly.util.PARM_CAR_MODEL
+import com.am.carly.util.PARM_CITY_CODE
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -29,8 +32,13 @@ class CarsActivity : BaseActivity(), KodeinAware {
     private val mFactory: CarsViewModelFactory by instance()
     private lateinit var mBinding: ActivityCarsBinding
     private lateinit var mViewModel: CarsViewModel
+    private lateinit var mCityName: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val extras = intent.extras
+        mCityName = extras.getString(PARM_CITY_CODE).toLowerCase()
+
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_cars)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CarsViewModel::class.java)
         mBinding.viewModel = mViewModel
@@ -39,7 +47,7 @@ class CarsActivity : BaseActivity(), KodeinAware {
     }
 
     private fun loadCarsFromFireStore() {
-        val query = FirebaseFirestore.getInstance().collection("cars_gaza")
+        val query = FirebaseFirestore.getInstance().collection("cars_$mCityName")
         val options = FirestoreRecyclerOptions.Builder<Car>()
             .setQuery(query, Car::class.java)
             .setLifecycleOwner(this@CarsActivity)
@@ -60,19 +68,27 @@ class CarsActivity : BaseActivity(), KodeinAware {
     }
 
     inner class CarHolder(var binding: ItemCarBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        private lateinit var mCar: Car
+
         init {
             itemView.setOnClickListener(this)
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(car: Car) {
-            if (car.imagesList.isNotEmpty()) {
-                Glide.with(binding.root.context).load(car.imagesList[0]).into(binding.imageView)
+            mCar = car
+            if (car.imagesList!!.isNotEmpty()) {
+                Glide.with(binding.root.context).load(car.imagesList!![0]).into(binding.carImageView)
             }
-            binding.textView.text = car.name
+            binding.nameTextView.text = car.name
+            binding.ratingBar.progress = car.rating!!
+            binding.pricePerDayTextView.text = "${car.pricePerDay} SIN/day"
         }
 
         override fun onClick(v: View?) {
-            startActivity(Intent(this@CarsActivity, CarDetailsActivity::class.java))
+            startActivity(Intent(this@CarsActivity, CarDetailsActivity::class.java).also {
+                it.putExtra(PARM_CAR_MODEL, mCar)
+            })
         }
     }
 }
