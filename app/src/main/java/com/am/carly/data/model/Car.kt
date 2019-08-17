@@ -1,9 +1,7 @@
 package com.am.carly.data.model
 
 import android.os.Parcelable
-import com.google.firebase.firestore.GeoPoint
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class Car(
@@ -15,7 +13,7 @@ data class Car(
     var isFullToFullPolicy: Boolean = false,
     var automaticTransmission: Boolean = false,
     var doorCount: String = "",
-    var location: @RawValue GeoPoint = GeoPoint(5.0, 5.1),
+    var location:  String = "",
     var city: String = "",
     var ownerId: String = ""
 ) : Parcelable

@@ -92,7 +92,7 @@ class ProfileActivity : BaseActivity(), KodeinAware {
 
         @SuppressLint("SetTextI18n")
         fun bind(car: Car) {
-            if (car.imagesList!!.isNotEmpty()) {
+            if (car.imagesList != null) {
                 Glide.with(binding.root.context).load(car.imagesList!![0]).into(binding.carImageView)
             }
             binding.nameTextView.text = car.name

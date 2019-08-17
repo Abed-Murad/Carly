@@ -21,6 +21,7 @@ import com.am.carly.data.model.City
 import com.am.carly.databinding.ActivityCitiesBinding
 import com.am.carly.databinding.ItemCityBinding
 import com.am.carly.ui.base.BaseActivity
+import com.am.carly.ui.cars.AddCarActivity
 import com.am.carly.ui.cars.CarsActivity
 import com.am.carly.ui.profile.ProfileActivity
 import com.am.carly.util.PARM_CITY_CODE
@@ -156,6 +157,9 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
+            R.id.navAddCar -> {
+                startActivity(Intent(this@CitiesActivity, AddCarActivity::class.java))
+            }
             R.id.navAbout -> {
                 LibsBuilder()
                     .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
@@ -173,7 +177,6 @@ class CitiesActivity : BaseActivity(), KodeinAware, NavigationView.OnNavigationI
                     .homeAsUpEnabled(true)
                     .launch(this@CitiesActivity)
             }
-
 
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
