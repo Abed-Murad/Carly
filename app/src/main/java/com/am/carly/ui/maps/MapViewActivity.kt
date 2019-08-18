@@ -8,7 +8,8 @@ import com.am.carly.R
 import com.am.carly.databinding.ActivityMapViewBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.cars.CarDetailsActivity
-import com.am.carly.util.FAKE
+import com.am.carly.util.getGazaFakeMarkersList
+import com.am.carly.util.getWestBankFakeMarkersList
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -52,8 +53,8 @@ class MapViewActivity : BaseActivity(), KodeinAware {
             }
 
             private fun loadMapFakeData() {
-                val fakeGazaCarsList = FAKE.getGazaFakeMarkersList(this@MapViewActivity)
-                val fakeWestBankCarsList = FAKE.getWestBankFakeMarkersList(this@MapViewActivity)
+                val fakeGazaCarsList = getGazaFakeMarkersList(this@MapViewActivity)
+                val fakeWestBankCarsList = getWestBankFakeMarkersList(this@MapViewActivity)
                 for (markerOptions in fakeGazaCarsList)
                     mGoogleMap!!.addMarker(markerOptions)
                 for (markerOptions in fakeWestBankCarsList)

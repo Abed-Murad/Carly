@@ -6,6 +6,7 @@
     <data>
         <variable name="viewModel" type="com.am.carly.ui.cars.CarDetailsViewModel"/>
         <variable name="car" type="com.am.carly.data.model.Car"/>
+        <variable name="owner" type="com.am.carly.data.model.User"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -83,6 +84,7 @@
 
                 <include
                         layout="@layout/card_car_info"
+                        bind:car="@{car}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/app_bar"
@@ -106,6 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
+                        bind:car="@{car}"
                         android:layout_marginEnd="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -133,6 +136,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
+                        bind:owner="@{owner}"
                         android:layout_marginBottom="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

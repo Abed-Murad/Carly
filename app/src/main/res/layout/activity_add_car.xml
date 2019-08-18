@@ -161,10 +161,11 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@+id/nextButton"
                     app:layout_constraintTop_toBottomOf="@+id/switch2"
-
-                    tools:layout_editor_absoluteY="726dp"
-                    tools:layout_editor_absoluteX="8dp"
-                    android:id="@+id/spinner"/>
+                    android:id="@+id/spinner"
+                    app:layout_constraintEnd_toEndOf="@+id/switch2"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"/>
             <Button
                     android:id="@+id/nextButton"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -179,8 +180,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

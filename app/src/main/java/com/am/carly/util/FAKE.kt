@@ -15,6 +15,7 @@ object FAKE {
     //Dummy
     val IMG_URL_FOOTBALL = "https://images.carscoops.com/2018/07/a3f42202-a4.jpg"
     val IMG_URL_STARS = "https://cdn.pixabay.com/photo/2016/03/23/07/44/bmw-1274292_960_720.jpg"
+}
 
     fun getGazaFakeMarkersList(context: Context): List<MarkerOptions> {
         val markerOptionsList = ArrayList<MarkerOptions>()
@@ -107,66 +108,67 @@ object FAKE {
         return markerOptionsList
     }
 
-    fun getWestBankFakeMarkersList(context: Context): List<MarkerOptions> {
-        val markerOptionsList = ArrayList<MarkerOptions>()
-        val carMarker = getCarMarker(context)
-        markerOptionsList.add(
-            MarkerOptions()
-                .position(LatLng(32.244486, 35.281339))
-                .title("Nissan Versa")
-                .snippet("250 NIS")
-                .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
-        )
-        markerOptionsList.add(
-            MarkerOptions()
-                .position(LatLng(32.098205, 35.394693))
-                .title("Toyota Yaris")
-                .snippet("210 NIS")
-                .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
-        )
-        markerOptionsList.add(
-            MarkerOptions()
-                .position(LatLng(31.903091, 35.382670))
-                .title("Ford Focus")
-                .snippet("220 NIS")
-                .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
-        )
-        markerOptionsList.add(
-            MarkerOptions()
-                .position(LatLng(31.676344, 35.286802))
-                .title("Nissan Sunny")
-                .snippet("230 NIS")
-                .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
-        )
-        markerOptionsList.add(
-            MarkerOptions()
-                .position(LatLng(31.525426, 35.099435))
-                .title("Hyundai Accent")
-                .snippet("240 NIS")
-                .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
-        )
-        markerOptionsList.add(
-            MarkerOptions()
-                .position(LatLng(31.428824, 34.999001))
-                .title("Toyota Corolla")
-                .snippet("250 NIS")
-                .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
-        )
-        markerOptionsList.add(
-            MarkerOptions()
-                .position(LatLng(31.911471, 35.167825))
-                .title("Nissan Micra")
-                .snippet("150 NIS")
-                .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
-        )
-        return markerOptionsList
-    }
 
-    private fun getCarMarker(context: Context): Bitmap {
-        val markerHeight = 75
-        val markerWidth = 75
-        val bitmapDrawable = context.resources.getDrawable(R.drawable.ic_car_marker) as BitmapDrawable
-        val bitmap = bitmapDrawable.bitmap
-        return Bitmap.createScaledBitmap(bitmap, markerWidth, markerHeight, false)
-    }
+    fun getWestBankFakeMarkersList(context: Context): List<MarkerOptions> {
+    val markerOptionsList = ArrayList<MarkerOptions>()
+    val carMarker = getCarMarker(context)
+    markerOptionsList.add(
+        MarkerOptions()
+            .position(LatLng(32.244486, 35.281339))
+            .title("Nissan Versa")
+            .snippet("250 NIS")
+            .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
+    )
+    markerOptionsList.add(
+        MarkerOptions()
+            .position(LatLng(32.098205, 35.394693))
+            .title("Toyota Yaris")
+            .snippet("210 NIS")
+            .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
+    )
+    markerOptionsList.add(
+        MarkerOptions()
+            .position(LatLng(31.903091, 35.382670))
+            .title("Ford Focus")
+            .snippet("220 NIS")
+            .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
+    )
+    markerOptionsList.add(
+        MarkerOptions()
+            .position(LatLng(31.676344, 35.286802))
+            .title("Nissan Sunny")
+            .snippet("230 NIS")
+            .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
+    )
+    markerOptionsList.add(
+        MarkerOptions()
+            .position(LatLng(31.525426, 35.099435))
+            .title("Hyundai Accent")
+            .snippet("240 NIS")
+            .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
+    )
+    markerOptionsList.add(
+        MarkerOptions()
+            .position(LatLng(31.428824, 34.999001))
+            .title("Toyota Corolla")
+            .snippet("250 NIS")
+            .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
+    )
+    markerOptionsList.add(
+        MarkerOptions()
+            .position(LatLng(31.911471, 35.167825))
+            .title("Nissan Micra")
+            .snippet("150 NIS")
+            .icon(BitmapDescriptorFactory.fromBitmap(carMarker))
+    )
+    return markerOptionsList
+}
+
+
+fun getCarMarker(context: Context): Bitmap {
+    val markerHeight = 75
+    val markerWidth = 75
+    val bitmapDrawable = context.resources.getDrawable(R.drawable.ic_car_marker) as BitmapDrawable
+    val bitmap = bitmapDrawable.bitmap
+    return Bitmap.createScaledBitmap(bitmap, markerWidth, markerHeight, false)
 }

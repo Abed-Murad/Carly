@@ -8,6 +8,8 @@ data class User(
     var email: String = "",
     var image: String = "",
     var joinedDate: Timestamp? = null,
-    var rateing: Int = 0,
-    var isUserApproved: Boolean  = false
+    var rating: Int = 0,
+    var isUserApproved: Boolean = false
 )
+
+
