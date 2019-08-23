@@ -39,6 +39,7 @@
                 android:label="@string/main_activity_title"/>
         <activity
                 android:name=".ui.cars.CarsActivity"
+                android:parentActivityName=".ui.cities.CitiesActivity"
                 android:label="@string/cars_activity_title"/>
         <activity
                 android:name=".ui.cars.CarDetailsActivity"
@@ -57,6 +58,7 @@
                 android:label="@string/policies_activity_title"/>
         <activity
                 android:name=".ui.cars.AddCarActivity"
+                android:parentActivityName=".ui.cities.CitiesActivity"
                 android:label="@string/add_car_activity_title"/>
         <activity
                 android:name=".ui.profile.ProfileActivity"

@@ -10,9 +10,8 @@ import com.firebase.ui.auth.AuthUI
 
 class StartActivityViewModel(private val userRepository: UserRepository) : ViewModel() {
 
-
     fun startFirebaseAuthUiActivity(view: View) {
-        val URL_TERMS_OF_SERVICE = "https://www.kabam.com/corporate/terms-of-service.html"
+        val URL_TERMS_OF_SERVICE = "https://ee35b44c-72fa-4155-9eb0-0ea6f4026dfc.htmlpasta.com/"
         val FIREBASE_UI_SIGN_IN_REQUEST_CODE = 1010
 
         val providers = listOf(
@@ -29,9 +28,9 @@ class StartActivityViewModel(private val userRepository: UserRepository) : ViewM
             .setTosAndPrivacyPolicyUrls(URL_TERMS_OF_SERVICE, URL_TERMS_OF_SERVICE)
             .build()
 
-        (view.context as BaseActivity).startActivityForResult(intent, FIREBASE_UI_SIGN_IN_REQUEST_CODE)
-
+        (view.context as BaseActivity).startActivityForResult(
+            intent,
+            FIREBASE_UI_SIGN_IN_REQUEST_CODE
+        )
     }
-
-
 }

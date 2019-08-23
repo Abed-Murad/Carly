@@ -1,7 +1,6 @@
 package com.am.carly.ui.cars
 
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,6 @@ import com.am.carly.data.model.Car
 import com.am.carly.data.repository.UserRepository
 import com.am.carly.ui.maps.ChooseLocationActivity
 import com.esafirm.imagepicker.features.ImagePicker
-import com.google.firebase.firestore.FirebaseFirestore
 
 class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
 
@@ -33,11 +31,11 @@ class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
             city = "Gaza"
         )
 
-        FirebaseFirestore.getInstance().collection("cars_gaza").document("one")
-            .set(car)
-            .addOnSuccessListener { Log.d("ttt", "DocumentSnapshot successfully written!") }
-            .addOnFailureListener { e -> Log.w("ttt", "Error writing document", e) }
-
+//        FirebaseFirestore.getInstance().collection("cars_gaza").document("one")
+//            .set(car)
+//            .addOnSuccessListener { Log.d("ttt", "DocumentSnapshot successfully written!") }
+//            .addOnFailureListener { e -> Log.w("ttt", "Error writing document", e) }
+//
         view.context.startActivity(Intent(view.context, ChooseLocationActivity::class.java))
     }
 
