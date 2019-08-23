@@ -167,15 +167,18 @@
                     android:layout_marginEnd="8dp"/>
 
             <Spinner
-                    android:layout_width="395dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@+id/nextButton"
-                    app:layout_constraintTop_toBottomOf="@+id/switch2"
                     android:id="@+id/spinner"
-                    app:layout_constraintEnd_toEndOf="@+id/switch2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:entries="@array/cities_array"
+                    app:layout_constraintBottom_toTopOf="@+id/nextButton"
+                    app:layout_constraintEnd_toEndOf="@+id/switch2"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"/>
+                    app:layout_constraintTop_toBottomOf="@+id/switch2" />
             <Button
                     android:id="@+id/nextButton"
                     style="@style/Widget.AppCompat.Button.Borderless"

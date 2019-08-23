@@ -13,5 +13,6 @@ data class Order(
     var location: String,
     var startDate: Timestamp,
     var endDate: Timestamp,
+    var daysCount:Int,
     var isOrderActive: Boolean
 ) : Parcelable

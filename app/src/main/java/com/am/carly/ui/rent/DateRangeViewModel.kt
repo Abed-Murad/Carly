@@ -13,7 +13,7 @@ import com.google.firebase.Timestamp
 import java.util.*
 
 class DateRangeViewModel(private val userRepository: UserRepository) : ViewModel() {
-    lateinit var selectedDate: Date
+    lateinit var selectedDate: List<Date>
     private lateinit var mOrder: Order
     lateinit var car: Car
 
@@ -25,8 +25,9 @@ class DateRangeViewModel(private val userRepository: UserRepository) : ViewModel
                 Card("", "", "", ""),
                 car,
                 "",
-                Timestamp(selectedDate),
-                Timestamp(selectedDate),
+                Timestamp(selectedDate.first()),
+                Timestamp(selectedDate.last()),
+                selectedDate.size,
                 false
             )
 

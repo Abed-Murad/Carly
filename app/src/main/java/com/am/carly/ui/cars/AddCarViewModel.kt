@@ -8,6 +8,7 @@ import com.am.carly.data.model.Car
 import com.am.carly.data.repository.UserRepository
 import com.am.carly.ui.maps.ChooseLocationActivity
 import com.am.carly.util.PARM_CAR_MODEL
+import com.am.carly.util.PARM_INTENT_SOURCE
 import com.esafirm.imagepicker.features.ImagePicker
 
 class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
@@ -39,6 +40,7 @@ class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
 //
         view.context.startActivity(Intent(view.context, ChooseLocationActivity::class.java).also {
             it.putExtra(PARM_CAR_MODEL, car)
+            it.putExtra(PARM_INTENT_SOURCE, "add_car_activity")
         })
     }
 

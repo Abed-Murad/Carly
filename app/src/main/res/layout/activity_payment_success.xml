@@ -104,6 +104,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="center_vertical"
+                                        android:id="@+id/currentDateTextView"
                                         android:text="20, June 2017"
                                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                         android:textColor="@color/grey_80"
@@ -117,6 +118,7 @@
                                 <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:id="@+id/currentTimeTextView"
                                         android:gravity="center_vertical"
                                         android:text="11:28 AM"
                                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
@@ -145,7 +147,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="center_vertical"
-                                        android:text="TO"
+                                        android:text="From"
                                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                                         android:textColor="@color/grey_40"/>
 
@@ -153,6 +155,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="center_vertical"
+                                        android:id="@+id/userNameTextView"
                                         android:text="Mary Jackson"
                                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                         android:textColor="@color/grey_80"
@@ -162,6 +165,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="center_vertical"
+                                        android:id="@+id/userEmailTextView"
                                         android:text="mary.jackson@mail.com"
                                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                                         android:textColor="@color/grey_40"/>
@@ -171,6 +175,7 @@
                             <com.mikhaellopez.circularimageview.CircularImageView
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
+                                    android:id="@+id/userImageView"
                                     app:civ_shadow="true"
                                     app:civ_shadow_radius="0"
                                     android:src="@drawable/photo_female_6"
@@ -204,7 +209,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="center_vertical"
-                                        android:text="£1548.0"
+                                        android:text="$1548.0"
+                                        android:id="@+id/amountTextView"
                                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                                         android:textColor="@color/grey_80"
                                         android:textStyle="bold"/>
