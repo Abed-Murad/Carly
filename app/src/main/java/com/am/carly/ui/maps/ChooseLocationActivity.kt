@@ -1,7 +1,10 @@
 package com.am.carly.ui.maps
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Criteria
+import android.location.LocationManager
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
@@ -21,6 +24,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
+
+
 
 
 class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
@@ -55,16 +60,21 @@ class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1001)
         } else {
             mMap.isMyLocationEnabled = true
+
         }
 
 
         mMap.setOnMyLocationButtonClickListener {
             mMap.clear()
-            mMap.addMarker(MarkerOptions().position(LatLng(mMap.myLocation.latitude, mMap.myLocation.longitude)))
-            mViewModel.location = LatLng(mMap.myLocation.latitude, mMap.myLocation.longitude).toString()
+            val service = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val criteria = Criteria()
+            val provider = service.getBestProvider(criteria, false)
+            val location = service.getLastKnownLocation(provider)
+            val userLocation = LatLng(location.latitude, location.longitude)
+            mMap.addMarker(MarkerOptions().position(userLocation))
+            mViewModel.location = userLocation.toString()
             true
         }
-
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(GAZA_STRIP_CENTER_LAT_LNG, MAP_GAZA_ZOOM_SCALE))
         mMap.setOnMapClickListener { point ->
@@ -75,7 +85,6 @@ class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
 
     }
 
-
     @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -84,6 +93,5 @@ class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
             mMap.isMyLocationEnabled = true
         }
     }
-
 
 }

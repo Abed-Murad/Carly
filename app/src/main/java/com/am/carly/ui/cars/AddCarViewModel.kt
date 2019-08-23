@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.am.carly.data.model.Car
 import com.am.carly.data.repository.UserRepository
 import com.am.carly.ui.maps.ChooseLocationActivity
+import com.am.carly.util.PARM_CAR_MODEL
 import com.esafirm.imagepicker.features.ImagePicker
 
 class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
@@ -22,7 +23,7 @@ class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
     fun onNextBtnClick(view: View) {
         val car = Car(
             name = name,
-            rating = null,
+            rating = 50,
             pricePerDay = pricePerDay,
             description = description,
             isFullToFullPolicy = isFullToFull,
@@ -36,7 +37,9 @@ class AddCarViewModel(var userRepository: UserRepository) : ViewModel() {
 //            .addOnSuccessListener { Log.d("ttt", "DocumentSnapshot successfully written!") }
 //            .addOnFailureListener { e -> Log.w("ttt", "Error writing document", e) }
 //
-        view.context.startActivity(Intent(view.context, ChooseLocationActivity::class.java))
+        view.context.startActivity(Intent(view.context, ChooseLocationActivity::class.java).also {
+            it.putExtra(PARM_CAR_MODEL, car)
+        })
     }
 
     fun pickImagesBtnClick(view: View) {
