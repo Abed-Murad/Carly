@@ -6,10 +6,12 @@ import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import com.am.carly.data.model.Order
 import com.am.carly.databinding.ActivityChooseLcationBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.maps.MapViewActivity.Companion.GAZA_STRIP_CENTER_LAT_LNG
 import com.am.carly.ui.maps.MapViewActivity.Companion.MAP_GAZA_ZOOM_SCALE
+import com.am.carly.util.PARM_ORDER_MODEL
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -28,10 +30,15 @@ class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
     private lateinit var mBinding: ActivityChooseLcationBinding
     private lateinit var mViewModel: ChooseLocationViewModel
     private lateinit var mMap: GoogleMap
+
+    private lateinit var mOrder: Order
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mOrder = intent.extras.getParcelable(PARM_ORDER_MODEL)
         mBinding = DataBindingUtil.setContentView(this, com.am.carly.R.layout.activity_choose_lcation)
         mViewModel = ViewModelProviders.of(this, mFactory).get(ChooseLocationViewModel::class.java)
+        mViewModel.order = mOrder
         mBinding.viewModel = mViewModel
 
         val mapFragment = supportFragmentManager.findFragmentById(com.am.carly.R.id.map) as SupportMapFragment?
@@ -54,6 +61,7 @@ class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
         mMap.setOnMyLocationButtonClickListener {
             mMap.clear()
             mMap.addMarker(MarkerOptions().position(LatLng(mMap.myLocation.latitude, mMap.myLocation.longitude)))
+            mViewModel.location = LatLng(mMap.myLocation.latitude, mMap.myLocation.longitude).toString()
             true
         }
 
@@ -62,6 +70,7 @@ class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
         mMap.setOnMapClickListener { point ->
             mMap.clear()
             mMap.addMarker(MarkerOptions().position(point))
+            mViewModel.location = point.toString()
         }
 
     }

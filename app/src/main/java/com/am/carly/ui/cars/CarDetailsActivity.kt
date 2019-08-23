@@ -42,10 +42,19 @@ class CarDetailsActivity : BaseActivity(), KodeinAware {
 
         mBinding = DataBindingUtil.setContentView(this, com.am.carly.R.layout.activity_car_details)
         mViewModel = ViewModelProviders.of(this, mFactory).get(CarDetailsViewModel::class.java)
+        mViewModel.car = mCar
         mBinding.viewModel = mViewModel
         mBinding.car = mCar
         mBinding.owner =
-            User("22311", "Abed", "asdaklsd@laskd.com", "https://picsum.photos/400/300", Timestamp.now(), 8, true)
+            User(
+                "22311",
+                "Abed",
+                "asdaklsd@laskd.com",
+                "https://picsum.photos/400/300",
+                Timestamp.now(),
+                8,
+                true
+            )
         setupImagesSlider()
         setupMapFragment()
 
@@ -55,7 +64,8 @@ class CarDetailsActivity : BaseActivity(), KodeinAware {
     }
 
     private fun setupMapFragment() {
-        val mapFragment = supportFragmentManager.findFragmentById(com.am.carly.R.id.map) as SupportMapFragment?
+        val mapFragment =
+            supportFragmentManager.findFragmentById(com.am.carly.R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync { googleMap ->
             mGoogleMap = googleMap
 

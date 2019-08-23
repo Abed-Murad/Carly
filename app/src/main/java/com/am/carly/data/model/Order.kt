@@ -1,14 +1,17 @@
 package com.am.carly.data.model
 
+import android.os.Parcelable
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.GeoPoint
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Order(
     var ownerId: String,
     var clientId: String,
-    var carId: String,
-    var location: GeoPoint,
+    var card: Card,
+    var car: Car,
+    var location: String,
     var startDate: Timestamp,
     var endDate: Timestamp,
-    var isOrderActive:Boolean
-)
+    var isOrderActive: Boolean
+) : Parcelable

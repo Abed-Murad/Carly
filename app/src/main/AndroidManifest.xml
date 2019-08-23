@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.am.carly">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.am.carly">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
             android:name=".util.MyApplication"
@@ -23,75 +23,78 @@
                 android:noHistory="true"
                 android:theme="@style/SplashScreenTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
                 android:name=".ui.login.StartActivity"
                 android:label="@string/start_activity_title"
-                android:theme="@style/AppTheme.NoActionBar"/>
+                android:theme="@style/AppTheme.NoActionBar" />
         <activity
                 android:name=".ui.cities.CitiesActivity"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:label="@string/main_activity_title"/>
+                android:label="@string/main_activity_title"
+                android:theme="@style/AppTheme.NoActionBar" />
         <activity
                 android:name=".ui.cars.CarsActivity"
-                android:parentActivityName=".ui.cities.CitiesActivity"
-                android:label="@string/cars_activity_title"/>
+                android:label="@string/cars_activity_title"
+                android:parentActivityName=".ui.cities.CitiesActivity" />
         <activity
                 android:name=".ui.cars.CarDetailsActivity"
-                android:label="@string/car_details_title"/>
+                android:label="@string/car_details_title"
+                android:parentActivityName=".ui.cars.CarsActivity" />
         <activity
                 android:name=".ui.maps.MapViewActivity"
-                android:label="@string/map_view_activity_title"/>
+                android:label="@string/map_view_activity_title" />
         <activity
                 android:name=".ui.rent.DateRangeActivity"
-                android:label="@string/date_range_activity_title"/>
+                android:parentActivityName=".ui.cars.CarDetailsActivity"
+                android:label="@string/date_range_activity_title" />
         <activity
                 android:name=".ui.maps.ChooseLocationActivity"
-                android:label="@string/choose_location_activity_title"/>
+                android:label="@string/choose_location_activity_title" />
         <activity
                 android:name=".ui.policies.PoliciesActivity"
-                android:label="@string/policies_activity_title"/>
+                android:label="@string/policies_activity_title" />
         <activity
                 android:name=".ui.cars.AddCarActivity"
-                android:parentActivityName=".ui.cities.CitiesActivity"
-                android:label="@string/add_car_activity_title"/>
+                android:label="@string/add_car_activity_title"
+                android:parentActivityName=".ui.cities.CitiesActivity" />
         <activity
                 android:name=".ui.profile.ProfileActivity"
-                android:label="@string/profile_activity_title"/>
+                android:label="@string/profile_activity_title" />
         <activity
                 android:name=".ui.payment.PaymentActivity"
-                android:label="@string/payment_activity_title"/>
+                android:label="@string/payment_activity_title" />
         <activity
                 android:name=".ui.payment.PaymentSuccessActivity"
-                android:label="@string/payment_success_activity_title"/>
+                android:label="@string/payment_success_activity_title" />
+
         <service
                 android:name=".data.service.FirebaseNotificationService"
                 android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
-                android:value="@string/google_maps_key"/>
+                android:value="@string/google_maps_key" />
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@mipmap/ic_launcher"/>
+                android:resource="@mipmap/ic_launcher" />
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
          notification message.-->
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_color"
-                android:resource="@color/colorAccent"/>
+                android:resource="@color/colorAccent" />
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
-                android:value="@string/default_notification_channel_id"/>
+                android:value="@string/default_notification_channel_id" />
     </application>
 
 </manifest>

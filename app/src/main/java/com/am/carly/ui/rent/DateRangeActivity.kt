@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
+import com.am.carly.data.model.Car
 import com.am.carly.databinding.ActivityDateRangeBinding
 import com.am.carly.ui.base.BaseActivity
+import com.am.carly.util.PARM_CAR_MODEL
 import com.squareup.timessquare.CalendarPickerView
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -17,11 +19,13 @@ class DateRangeActivity : BaseActivity(), KodeinAware {
     private val mFactory: DateRangeViewModelFactory by instance()
     private lateinit var mBinding: ActivityDateRangeBinding
     private lateinit var mViewModel: DateRangeViewModel
-
+    private lateinit var mCar: Car
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mCar = intent.extras.getParcelable(PARM_CAR_MODEL)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_date_range)
         mViewModel = ViewModelProviders.of(this, mFactory).get(DateRangeViewModel::class.java)
+        mViewModel.car = mCar
         mBinding.viewModel = mViewModel
 
         setupDateRangeView()
@@ -38,6 +42,7 @@ class DateRangeActivity : BaseActivity(), KodeinAware {
             override fun onDateSelected(date: Date?) {
                 val calSelected = Calendar.getInstance()
                 calSelected.time = date
+                mViewModel.selectedDate = date!!
             }
 
             override fun onDateUnselected(date: Date?) {

@@ -9,8 +9,11 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
+import com.am.carly.data.model.Card
+import com.am.carly.data.model.Order
 import com.am.carly.databinding.ActivityPaymentBinding
 import com.am.carly.ui.base.BaseActivity
+import com.am.carly.util.PARM_ORDER_MODEL
 import com.am.carly.util.insertPeriodically
 import kotlinx.android.synthetic.main.activity_payment.*
 import org.kodein.di.KodeinAware
@@ -23,11 +26,13 @@ class PaymentActivity : BaseActivity(), KodeinAware {
     private val mFactory: PaymentActivityViewModelFactory by instance()
     private lateinit var mBinding: ActivityPaymentBinding
     private lateinit var mViewModel: PaymentActivityViewModel
-
+    private lateinit var mOrder: Order
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mOrder = intent.extras.getParcelable(PARM_ORDER_MODEL)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_payment)
         mViewModel = ViewModelProviders.of(this, mFactory).get(PaymentActivityViewModel::class.java)
+        mViewModel.order = mOrder
         mBinding.viewModel = mViewModel
 
         setupTextChangeListeners()
@@ -48,7 +53,16 @@ class PaymentActivity : BaseActivity(), KodeinAware {
     }
 
     private fun showDialogPaymentSuccess() {
-        startActivity(Intent(this@PaymentActivity, PaymentSuccessActivity::class.java))
+        mViewModel.order.card = Card(
+            mViewModel.cardNumber,
+            mViewModel.expire,
+            mViewModel.cvv,
+            mViewModel.nameOnCard
+        )
+        startActivity(Intent(this@PaymentActivity, PaymentSuccessActivity::class.java).also {
+            it.putExtra(PARM_ORDER_MODEL, mViewModel.order)
+
+        })
     }
 
     private fun setupTextChangeListeners() {
@@ -61,7 +75,8 @@ class PaymentActivity : BaseActivity(), KodeinAware {
                 if (charSequence.toString().trim { it <= ' ' }.isEmpty()) {
                     card_number.text = "**** **** **** ****"
                 } else {
-                    val number = insertPeriodically(charSequence.toString().trim { it <= ' ' }, " ", 4)
+                    val number =
+                        insertPeriodically(charSequence.toString().trim { it <= ' ' }, " ", 4)
                     card_number.text = number
                 }
             }
