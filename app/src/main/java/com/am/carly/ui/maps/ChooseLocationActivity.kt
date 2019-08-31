@@ -15,6 +15,7 @@ import com.am.carly.databinding.ActivityChooseLcationBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.maps.MapViewActivity.Companion.GAZA_STRIP_CENTER_LAT_LNG
 import com.am.carly.ui.maps.MapViewActivity.Companion.MAP_GAZA_ZOOM_SCALE
+import com.am.carly.util.ARG_ADD_CAR_ACTIVITY
 import com.am.carly.util.PARM_CAR_MODEL
 import com.am.carly.util.PARM_INTENT_SOURCE
 import com.am.carly.util.PARM_ORDER_MODEL
@@ -27,7 +28,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
-
 
 class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
 
@@ -45,7 +45,7 @@ class ChooseLocationActivity : BaseActivity(), KodeinAware, OnMapReadyCallback {
         mViewModel = ViewModelProviders.of(this, mFactory).get(ChooseLocationViewModel::class.java)
         intentSource = intent.extras.getString(PARM_INTENT_SOURCE)
         mViewModel.intentSource = intentSource
-        if (intentSource == "add_car_activity") {
+        if (intentSource == ARG_ADD_CAR_ACTIVITY) {
             mCar = intent.extras.getParcelable(PARM_CAR_MODEL)
             mViewModel.car = mCar
         } else {

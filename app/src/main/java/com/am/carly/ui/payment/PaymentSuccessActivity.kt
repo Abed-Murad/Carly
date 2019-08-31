@@ -37,7 +37,7 @@ class PaymentSuccessActivity : BaseActivity(), KodeinAware {
         mBinding.viewModel = mViewModel
 
 
-        val amount = mOrder.daysCount * mOrder.car.pricePerDay.toInt()
+        val amount = mOrder.daysCount * mOrder.car!!.pricePerDay.toInt()
         amountTextView.text = "$$amount"
 
         val date = SimpleDateFormat("EEE, MMM d, ''yy")

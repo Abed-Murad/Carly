@@ -8,6 +8,8 @@ import com.am.carly.data.model.Card
 import com.am.carly.data.model.Order
 import com.am.carly.data.repository.UserRepository
 import com.am.carly.ui.maps.ChooseLocationActivity
+import com.am.carly.util.ARG_CREATE_NEW_ORDER
+import com.am.carly.util.PARM_INTENT_SOURCE
 import com.am.carly.util.PARM_ORDER_MODEL
 import com.google.firebase.Timestamp
 import java.util.*
@@ -33,7 +35,7 @@ class DateRangeViewModel(private val userRepository: UserRepository) : ViewModel
 
         view.context.startActivity(Intent(view.context, ChooseLocationActivity::class.java).also {
             it.putExtra(PARM_ORDER_MODEL, mOrder)
-
+            it.putExtra(PARM_INTENT_SOURCE, ARG_CREATE_NEW_ORDER)
         })
 
 

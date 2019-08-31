@@ -12,6 +12,7 @@ import com.am.carly.databinding.ActivityAddCarBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.login.AddCarViewModelFactory
 import com.esafirm.imagepicker.features.ImagePicker
+import com.esafirm.imagepicker.model.Image
 import kotlinx.android.synthetic.main.activity_add_car.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -67,6 +68,15 @@ class AddCarActivity : BaseActivity(), KodeinAware {
             if (images != null && images.size != 0) {
                 imagesHolder.visibility = GONE
                 imageNumberTextView.visibility = VISIBLE
+
+                images.forEach {
+                    checkIfCarIncludesACarImage(it)
+
+                }
+
+
+
+
             } else {
                 imagesHolder.visibility = VISIBLE
                 imageNumberTextView.visibility = GONE
@@ -74,6 +84,37 @@ class AddCarActivity : BaseActivity(), KodeinAware {
         }
         super.onActivityResult(requestCode, resultCode, data)
 
+    }
+
+    private fun checkIfCarIncludesACarImage(image:Image) {
+//        //Configure the detector//
+//        val options = FirebaseVisionOnDeviceImageLabelerOptions.Builder()
+//            .setConfidenceThreshold(0.7f)
+//            .build()
+//
+//        //Create a FirebaseVisionImage object//
+//
+//        val image = FirebaseVisionImage.fromBitmap(mBitmap)
+//
+//        //Create an instance of FirebaseVisionLabelDetector//
+//
+//        val detector = FirebaseVision.getInstance().getOnDeviceImageLabeler(options)
+//
+//        //Register an OnSuccessListener//
+//
+//        detector.processImage(image).addOnSuccessListener { labels ->
+//            //Implement the onSuccess callback//
+//            for (label in labels) {
+//                val text = label.text
+//                val entityId = label.entityId
+//                val confidence = label.confidence
+//                Log.d("ttt", "text:$text entityId:$entityId confidence:$confidence")
+//            }
+//            Log.d("ttt", "--------------")
+//
+//        }.addOnFailureListener { e ->
+//            textView.text = e.message
+//        }
     }
 
 }

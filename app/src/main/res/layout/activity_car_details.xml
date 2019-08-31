@@ -3,19 +3,32 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:bind="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <variable name="viewModel" type="com.am.carly.ui.cars.CarDetailsViewModel"/>
-        <variable name="car" type="com.am.carly.data.model.Car"/>
-        <variable name="owner" type="com.am.carly.data.model.User"/>
+
+        <variable
+                name="viewModel"
+                type="com.am.carly.ui.cars.CarDetailsViewModel" />
+
+        <variable
+                name="car"
+                type="com.am.carly.data.model.Car" />
+
+        <variable
+                name="owner"
+                type="com.am.carly.data.model.User" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <ScrollView android:layout_width="match_parent"
-                    app:layout_constraintBottom_toTopOf="@id/nextButton"
-                    android:id="@+id/scrollView"
-                    android:layout_height="wrap_content">
+        <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/nextButton">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -26,8 +39,8 @@
                         android:layout_height="wrap_content"
                         android:fitsSystemWindows="true"
                         android:theme="@style/AppTheme.AppBarOverlay"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -50,7 +63,7 @@
                                     android:layout_height="240dp"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                     android:id="@+id/imageNumberTextView"
@@ -68,7 +81,7 @@
                                     app:layout_constraintHorizontal_bias="0.045"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.924"/>
+                                    app:layout_constraintVertical_bias="0.924" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,30 +90,150 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="?attr/actionBarSize"
                                 app:layout_collapseMode="pin"
-                                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
                 </com.google.android.material.appbar.AppBarLayout>
 
                 <include
                         layout="@layout/card_car_info"
-                        bind:car="@{car}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/app_bar"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
-                <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/infoRecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/carInfoCard"
-                        tools:listitem="@layout/card_info"/>
+                        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+                        bind:car="@{car}" />
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/infoRecyclerView"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/carInfoCard" >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:layout_margin="8dp">
+
+                        <ImageView
+                                android:id="@+id/doorsCountImageView"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.2"
+                                app:srcCompat="@drawable/ic_door" />
+
+                        <TextView
+                                android:id="@+id/doorsCountTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="2 doors"
+                                android:textColor="@color/black"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/doorsCountImageView" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:layout_margin="8dp">
+
+                        <ImageView
+                                android:id="@+id/seatsImageView"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.2"
+                                app:srcCompat="@drawable/ic_seat" />
+
+                        <TextView
+                                android:id="@+id/seatsTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="4 seats"
+                                android:textColor="@color/black"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/seatsImageView" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:layout_margin="8dp">
+
+                        <ImageView
+                                android:id="@+id/seriesImageView"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.2"
+                                app:srcCompat="@drawable/ic_gas" />
+
+                        <TextView
+                                android:id="@+id/seriesTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="Full to Full"
+                                android:textColor="@color/black"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/seriesImageView" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:layout_margin="8dp">
+
+                        <ImageView
+                                android:id="@+id/transitionImageView"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.2"
+                                app:srcCompat="@drawable/ic_fuel" />
+
+                        <TextView
+                                android:id="@+id/transitionTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center"
+                                android:padding="4dp"
+                                android:text="Auto"
+                                android:textColor="@color/black"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/transitionImageView" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+
                 <include
                         android:id="@+id/description"
                         layout="@layout/card_car_description"
@@ -108,23 +241,23 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
-                        bind:car="@{car}"
                         android:layout_marginEnd="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/infoRecyclerView"/>
+                        app:layout_constraintTop_toBottomOf="@+id/infoRecyclerView"
+                        bind:car="@{car}" />
 
 
                 <fragment
                         android:id="@+id/map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="16dp"
                         android:layout_height="200dp"
-                        tools:context=".activity.LocationActivity"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/description"/>
+                        app:layout_constraintTop_toBottomOf="@+id/description"
+                        tools:context=".activity.LocationActivity" />
 
 
                 <include
@@ -133,14 +266,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
-                        bind:owner="@{owner}"
                         android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/map"/>
+                        app:layout_constraintTop_toBottomOf="@+id/map"
+                        bind:owner="@{owner}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,16 +284,15 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="@string/rent_this_car"
-                android:onClick="@{viewModel::onNextBtnClick}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="16dp"
+                android:background="@color/colorAccent"
+                android:onClick="@{viewModel::onNextBtnClick}"
+                android:text="@string/rent_this_car"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-        />
+                app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

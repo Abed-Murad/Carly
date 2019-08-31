@@ -19,6 +19,7 @@ class SplashScreenActivity : BaseActivity(), KodeinAware {
 
         mSplashViewModel = ViewModelProviders.of(this, mFactory).get(SplashViewModel::class.java)
         mSplashViewModel.getLoginInfo().observe(this, Observer {
+
             startStartActivity()
         })
     }

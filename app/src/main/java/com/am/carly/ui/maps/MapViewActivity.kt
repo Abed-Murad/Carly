@@ -5,9 +5,11 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
+import com.am.carly.data.model.Car
 import com.am.carly.databinding.ActivityMapViewBinding
 import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.cars.CarDetailsActivity
+import com.am.carly.util.PARM_CAR_MODEL
 import com.am.carly.util.getGazaFakeMarkersList
 import com.am.carly.util.getWestBankFakeMarkersList
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -40,7 +42,13 @@ class MapViewActivity : BaseActivity(), KodeinAware {
                 mGoogleMap = googlMap
 
                 mGoogleMap!!.setOnInfoWindowClickListener {
-                    startActivity(Intent(this@MapViewActivity, CarDetailsActivity::class.java))
+                    startActivity(
+                        Intent(this@MapViewActivity, CarDetailsActivity::class.java).also {
+                            it.putExtra(
+                                PARM_CAR_MODEL,
+                                Car(imagesList = arrayListOf("https://cdn.vox-cdn.com/thumbor/8OMQ7hU8ffjuZeGGbYKsmNMvKVA=/0x0:2040x1360/1200x675/filters:focal(857x517:1183x843)/cdn.vox-cdn.com/uploads/chorus_image/image/56581863/twarren_08202017_1939_0003.0.jpg"))
+                            )
+                        })
                 }
 
                 loadMapFakeData()

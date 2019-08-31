@@ -5,9 +5,13 @@ import android.webkit.WebView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.am.carly.R
+import com.am.carly.data.model.Car
 import com.am.carly.data.model.Order
 import com.am.carly.databinding.ActivityPoliciesBinding
 import com.am.carly.ui.base.BaseActivity
+import com.am.carly.util.ARG_ADD_CAR_ACTIVITY
+import com.am.carly.util.PARM_CAR_MODEL
+import com.am.carly.util.PARM_INTENT_SOURCE
 import com.am.carly.util.PARM_ORDER_MODEL
 import com.google.android.gms.maps.GoogleMap
 import org.kodein.di.KodeinAware
@@ -21,12 +25,21 @@ class PoliciesActivity : BaseActivity(), KodeinAware {
     private lateinit var mViewModel: PoliciesViewModel
     private var mGoogleMap: GoogleMap? = null
     private lateinit var mOrder: Order
+    private lateinit var mCar: Car
+    private lateinit var intentSource: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mOrder = intent.extras.getParcelable(PARM_ORDER_MODEL)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_policies)
+        intentSource = intent.extras.getString(PARM_INTENT_SOURCE)
         mViewModel = ViewModelProviders.of(this, mFactory).get(PoliciesViewModel::class.java)
-        mViewModel.order = mOrder
+        mViewModel.intentSource = intentSource
+        if (intentSource == ARG_ADD_CAR_ACTIVITY) {
+            mCar = intent.extras.getParcelable(PARM_CAR_MODEL)
+            mViewModel.car = mCar
+        } else {
+            mOrder = intent.extras.getParcelable(PARM_ORDER_MODEL)
+            mViewModel.order = mOrder
+        }
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_policies)
         mBinding.viewModel = mViewModel
 
 

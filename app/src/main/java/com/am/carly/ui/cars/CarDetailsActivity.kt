@@ -48,9 +48,9 @@ class CarDetailsActivity : BaseActivity(), KodeinAware {
         mBinding.owner =
             User(
                 "22311",
-                "Abed",
-                "asdaklsd@laskd.com",
-                "https://picsum.photos/400/300",
+                "Abed Murad",
+                "Abed.Murad@ProtonMail.comk",
+                "https://pbs.twimg.com/profile_images/1066618437886271488/lKwp0Bgy_400x400.jpg",
                 Timestamp.now(),
                 8,
                 true
@@ -58,7 +58,7 @@ class CarDetailsActivity : BaseActivity(), KodeinAware {
         setupImagesSlider()
         setupMapFragment()
 
-        Glide.with(this).load("https://picsum.photos/400/300").into(profile_image)
+        Glide.with(this).load("https://pbs.twimg.com/profile_images/1066618437886271488/lKwp0Bgy_400x400.jpg").into(profile_image)
         joinedDateTextView.text = "Joined ${PrettyTime().format(Timestamp.now().toDate())}"
 
     }
