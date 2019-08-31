@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.databinding.DataBindingUtil
@@ -15,6 +16,7 @@ import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.login.AddCarViewModelFactory
 import com.esafirm.imagepicker.features.ImagePicker
 import com.esafirm.imagepicker.model.Image
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceImageLabelerOptions
@@ -69,15 +71,14 @@ class AddCarActivity : BaseActivity(), KodeinAware {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             val images = ImagePicker.getImages(data)
             mBinding.imageNumberTextView.text = "1 of ${images.size}"
-            mImagesSliderAdapter.updateImagesList(images)
 
             if (images != null && images.size != 0) {
                 imagesHolder.visibility = GONE
                 imageNumberTextView.visibility = VISIBLE
-
                 images.forEach {
                     checkIfCarIncludesACarImage(it)
                 }
+                mImagesSliderAdapter.updateImagesList(images)
             } else {
                 imagesHolder.visibility = VISIBLE
                 imageNumberTextView.visibility = GONE
@@ -102,20 +103,38 @@ class AddCarActivity : BaseActivity(), KodeinAware {
         val detector = FirebaseVision.getInstance().getOnDeviceImageLabeler(options)
 
         //Register an OnSuccessListener//
-
         detector.processImage(firebaseVisionImage).addOnSuccessListener { labels ->
-            //Implement the onSuccess callback//
-            for (label in labels) {
-                val text = label.text
-                val entityId = label.entityId
-                val confidence = label.confidence
-                Log.d("ttt", "text:$text entityId:$entityId confidence:$confidence")
-            }
-            Log.d("ttt", "--------------")
 
+
+            var isCar = false
+            labels.forEach {
+                val text = it.text
+                val entityId = it.entityId
+                val confidence = it.confidence
+                Log.d("ttt", "text:$text entityId:$entityId confidence:$confidence")
+
+                if (it.text == "Vehicle" || it.text == "Car") {
+                    isCar = true
+                }
+            }
+            if (!isCar) {
+                onSNACK(mBinding.priceLayout)
+                imagesHolder.visibility = VISIBLE
+                imageNumberTextView.visibility = GONE
+            }
         }.addOnFailureListener { e ->
             Log.e("tt", e.message)
         }
+    }
+
+
+    fun onSNACK(view: View) {
+        //Snackbar(view)
+        val snackbar = Snackbar.make(
+            view, "This is not a car image, try again!",
+            Snackbar.LENGTH_LONG
+        ).setAction("Close", null)
+        snackbar.show()
     }
 
 }
