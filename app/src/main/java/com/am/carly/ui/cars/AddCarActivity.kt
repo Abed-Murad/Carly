@@ -2,7 +2,9 @@ package com.am.carly.ui.cars
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.databinding.DataBindingUtil
@@ -13,10 +15,14 @@ import com.am.carly.ui.base.BaseActivity
 import com.am.carly.ui.login.AddCarViewModelFactory
 import com.esafirm.imagepicker.features.ImagePicker
 import com.esafirm.imagepicker.model.Image
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceImageLabelerOptions
 import kotlinx.android.synthetic.main.activity_add_car.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
+import java.io.File
 
 
 class AddCarActivity : BaseActivity(), KodeinAware {
@@ -71,50 +77,45 @@ class AddCarActivity : BaseActivity(), KodeinAware {
 
                 images.forEach {
                     checkIfCarIncludesACarImage(it)
-
                 }
-
-
-
-
             } else {
                 imagesHolder.visibility = VISIBLE
                 imageNumberTextView.visibility = GONE
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
-
     }
 
-    private fun checkIfCarIncludesACarImage(image:Image) {
-//        //Configure the detector//
-//        val options = FirebaseVisionOnDeviceImageLabelerOptions.Builder()
-//            .setConfidenceThreshold(0.7f)
-//            .build()
-//
-//        //Create a FirebaseVisionImage object//
-//
-//        val image = FirebaseVisionImage.fromBitmap(mBitmap)
-//
-//        //Create an instance of FirebaseVisionLabelDetector//
-//
-//        val detector = FirebaseVision.getInstance().getOnDeviceImageLabeler(options)
-//
-//        //Register an OnSuccessListener//
-//
-//        detector.processImage(image).addOnSuccessListener { labels ->
-//            //Implement the onSuccess callback//
-//            for (label in labels) {
-//                val text = label.text
-//                val entityId = label.entityId
-//                val confidence = label.confidence
-//                Log.d("ttt", "text:$text entityId:$entityId confidence:$confidence")
-//            }
-//            Log.d("ttt", "--------------")
-//
-//        }.addOnFailureListener { e ->
-//            textView.text = e.message
-//        }
+    private fun checkIfCarIncludesACarImage(image: Image) {
+        //Configure the detector//
+        val options = FirebaseVisionOnDeviceImageLabelerOptions.Builder()
+            .setConfidenceThreshold(0.7f)
+            .build()
+
+        //Create a FirebaseVisionImage object//
+
+        val firebaseVisionImage =
+            FirebaseVisionImage.fromFilePath(this, Uri.fromFile(File(image.path)))
+
+        //Create an instance of FirebaseVisionLabelDetector//
+
+        val detector = FirebaseVision.getInstance().getOnDeviceImageLabeler(options)
+
+        //Register an OnSuccessListener//
+
+        detector.processImage(firebaseVisionImage).addOnSuccessListener { labels ->
+            //Implement the onSuccess callback//
+            for (label in labels) {
+                val text = label.text
+                val entityId = label.entityId
+                val confidence = label.confidence
+                Log.d("ttt", "text:$text entityId:$entityId confidence:$confidence")
+            }
+            Log.d("ttt", "--------------")
+
+        }.addOnFailureListener { e ->
+            Log.e("tt", e.message)
+        }
     }
 
 }

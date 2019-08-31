@@ -215,7 +215,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0.2"
-                                app:srcCompat="@drawable/ic_fuel" />
+                                app:srcCompat="@drawable/ic_transmission" />
 
                         <TextView
                                 android:id="@+id/transitionTitle"
@@ -224,7 +224,7 @@
                                 android:layout_marginTop="4dp"
                                 android:gravity="center"
                                 android:padding="4dp"
-                                android:text="Auto"
+                                android:text="Automatic "
                                 android:textColor="@color/black"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
