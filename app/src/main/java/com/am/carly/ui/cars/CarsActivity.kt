@@ -48,10 +48,12 @@ class CarsActivity : BaseActivity(), KodeinAware {
 
     private fun loadCarsFromFireStore() {
         val query = FirebaseFirestore.getInstance().collection("cars_$mCityName")
+
         val options = FirestoreRecyclerOptions.Builder<Car>()
             .setQuery(query, Car::class.java)
             .setLifecycleOwner(this@CarsActivity)
             .build()
+
         val adapter = object : FirestoreRecyclerAdapter<Car, CarHolder>(options) {
             override fun onBindViewHolder(holder: CarHolder, position: Int, model: Car) {
                 holder.bind(model)

@@ -26,7 +26,6 @@ import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import java.io.File
 
-
 class AddCarActivity : BaseActivity(), KodeinAware {
     override val kodein by kodein()
     private val mFactory: AddCarViewModelFactory by instance()
