@@ -49,8 +49,8 @@ class PaymentSuccessActivity : BaseActivity(), KodeinAware {
         currentTimeTextView.text = timeString
 
         val user = FirebaseAuth.getInstance().currentUser
-        userEmailTextView.text = user!!.email
-        userNameTextView.text = user.displayName
-        Glide.with(this).load(user.photoUrl).into(userImageView)
+        userEmailTextView.text = "Abdallah.Murad@Protonmail.com"
+        userNameTextView.text = "Abdallah Murad"
+        Glide.with(this).load("https://i1.rgstatic.net/ii/profile.image/695943527690240-1542937275015_Q512/Abdallah_Murad.jpg").into(userImageView)
     }
 }
